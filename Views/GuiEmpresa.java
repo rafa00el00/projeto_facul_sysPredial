@@ -38,9 +38,8 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
          Vector v = new Vector();
          v.add(ep.getCnpj());
          v.add(ep.getRazaoSocial());
-         v.add(String.format("dd/MM/yyyy",ep.getHorarioFuncionamento()));
-         v.add(ep.getTemperaturaPadrao());
-         v.add(String.format("HH:mm",ep.getHorarioArCondicionado()));
+         v.add(String.format("%tD\n",ep.getHorarioFuncionamento()));
+         v.add(ep.getTemperaturaPadrao() + " - " + String.format("%tT\n",ep.getHorarioArCondicionado()));
          dados.add(v);
       }
       

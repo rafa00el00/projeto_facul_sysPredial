@@ -3,7 +3,11 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Vector;
+import java.util.Date;
 import languages.*;
+import Models.*;
 
 
 public class GuiConjunto extends GuiConsultar implements ActionListener{
@@ -19,8 +23,18 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
                            {"02","1","R$ 200,00","45m²","Não"},
                            {"09","3","R$ 300,00","50m²","Não"}
                            };
-      DefaultTableModel dtm = new DefaultTableModel(linhas,colunas);
-      tblConsulta.setModel(dtm);
+                           
+
+      Vector<Vector> dados = new Vector<Vector>();
+      for(Empresa ep : empresas){
+         Vector v = new Vector();
+         v.add(ep.getCnpj());
+         v.add(ep.getRazaoSocial());
+         v.add(String.format("%tD\n",ep.getHorarioFuncionamento()));
+         v.add(ep.getTemperaturaPadrao() + " - " + String.format("%tT\n",ep.getHorarioArCondicionado()));
+         dados.add(v);
+      }
+
       
       btnNovo.addActionListener(this);
       btnAlterar.addActionListener(this);
