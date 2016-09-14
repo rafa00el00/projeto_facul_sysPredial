@@ -55,7 +55,7 @@ public class GuiLogin extends JDialog implements ActionListener{
          //if(txtLogin.getText().equals("Admin") && txtSenha.getText().equals("123")){
          Usuario usr = login.logar(txtLogin.getText(),txtSenha.getText());
          if(usr != null){
-            GuiMenu lg = new GuiMenu();
+            GuiMenu lg = new GuiMenu(usr);
             lg.setVisible(true);
             this.dispose();
          }

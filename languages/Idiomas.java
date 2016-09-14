@@ -4,9 +4,13 @@ import java.util.ResourceBundle;
 
 public abstract class Idiomas{
    private static ResourceBundle bn = null;
+   
+   public enum IDIOMASDISPONIVEIS{
+      EN,PT,SP
+   }
   
    public static void iniciar(){
-     bn = ResourceBundle.getBundle("Idiomas/ex1");
+      bn = ResourceBundle.getBundle("Idiomas/ex1");
    }
    
    
@@ -14,7 +18,15 @@ public abstract class Idiomas{
       return bn.getString(nome);
    }
    
-   public static void changeIdioma(){
-      bn = ResourceBundle.getBundle("Idiomas/ex1", new Locale("pt", "BR"));
+   public static void changeIdioma(IDIOMASDISPONIVEIS idm){
+      if (idm == IDIOMASDISPONIVEIS.PT){
+         bn = ResourceBundle.getBundle("Idiomas/ex1", new Locale("pt", "BR"));
+      }
+      else if (idm == IDIOMASDISPONIVEIS.EN){
+         bn = ResourceBundle.getBundle("Idiomas/ex1", new Locale("en", "US"));
+      }
+      else if (idm == IDIOMASDISPONIVEIS.SP){
+         bn = ResourceBundle.getBundle("Idiomas/ex1", new Locale("sp", "SP"));
+      }
    }
 }

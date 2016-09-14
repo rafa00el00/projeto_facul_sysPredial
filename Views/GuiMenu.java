@@ -3,19 +3,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import languages.*;
+import Models.*;
 
 public class GuiMenu extends JFrame implements ActionListener{
    
-   private JMenu mnuArquivo, mnuUsuario,mnuEmpresa,mnuConjunto,mnuArCondicionado;
+   private JMenu mnuArquivo, mnuUsuario,mnuEmpresa,mnuConjunto,mnuArCondicionado,mnuIdiomas;
    private JMenuItem mnuItExit,mnuItConsultarConjunto,mnuItConsultarEmpresa,mnuItConsultarUsuario
-   ,mnuItAlterarArCondicionado;
+   ,mnuItAlterarArCondicionado,mnuItPT,mnuItEN,mnuItSP;
    private JLabel lblFundo;
+   private Usuario usr;
    
-   public GuiMenu(){
+   public GuiMenu(Usuario user){
       super(Idiomas.getString("GuiMenu.title"));
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       setSize(600,500);
-
+      this.usr = user;
       
       //Barra de Menu
       JMenuBar bar = new JMenuBar();
@@ -57,14 +59,33 @@ public class GuiMenu extends JFrame implements ActionListener{
       mnuItAlterarArCondicionado =  new JMenuItem(Idiomas.getString("GuiMenu.mnuArCondicionado.Alterar"));
       mnuItAlterarArCondicionado.addActionListener(this);
       mnuArCondicionado.add(mnuItAlterarArCondicionado);
-      
-      
-      //AddMenus
+       //AddMenus
       bar.add(mnuArquivo);
       bar.add(mnuUsuario);
       bar.add(mnuEmpresa);
       bar.add(mnuConjunto);
-      bar.add(mnuArCondicionado);
+      bar.add(mnuArCondicionado);  
+   
+   
+      if (user.getPerfil().equals("Gerente")){
+      //Idiomas
+         mnuIdiomas = new JMenu(Idiomas.getString("GuiMenu.mnuIdiomas"));
+         mnuIdiomas.setMnemonic(Idiomas.getString("GuiMenu.mnuIdiomas.mnemonico").charAt(0));
+         mnuItPT =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItPT"));
+         mnuItPT.addActionListener(this);
+         mnuIdiomas.add(mnuItPT);
+         mnuItEN =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItEN"));
+         mnuItEN.addActionListener(this);
+         mnuIdiomas.add(mnuItEN);
+         mnuItSP =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItSP"));
+         mnuItSP.addActionListener(this);
+         mnuIdiomas.add(mnuItSP);
+         bar.add(mnuIdiomas);
+      }
+      
+      
+     
+   
       
       ImageIcon img = new ImageIcon(getClass().getResource("../imgs/fundo.png"));
       lblFundo = new JLabel(img);
@@ -76,18 +97,40 @@ public class GuiMenu extends JFrame implements ActionListener{
       
       if ( e.getSource() == mnuItExit ){
          System.exit(0);
-      }else if (e.getSource() == mnuItConsultarUsuario){
+      }
+      else if (e.getSource() == mnuItConsultarUsuario){
          GuiUsuario usr = new GuiUsuario();
          usr.setVisible(true);
-      }else if (e.getSource() == mnuItConsultarEmpresa){
+      }
+      else if (e.getSource() == mnuItConsultarEmpresa){
          GuiEmpresa usr = new GuiEmpresa();
          usr.setVisible(true);
-      }else if (e.getSource() == mnuItConsultarConjunto){
+      }
+      else if (e.getSource() == mnuItConsultarConjunto){
          GuiConjunto usr = new GuiConjunto();
          usr.setVisible(true);
-      }else if (e.getSource() == mnuItAlterarArCondicionado){
+      }
+      else if (e.getSource() == mnuItAlterarArCondicionado){
          GuiControleArCondicionado usr = new GuiControleArCondicionado();
          usr.setVisible(true);
+      }
+      else if (e.getSource() == mnuItPT){
+         Idiomas.changeIdioma(Idiomas.IDIOMASDISPONIVEIS.PT);
+         GuiMenu mn = new GuiMenu(usr);
+         mn.setVisible(true);
+         dispose();
+      }
+      else if (e.getSource() == mnuItEN){
+         Idiomas.changeIdioma(Idiomas.IDIOMASDISPONIVEIS.EN);
+         GuiMenu mn = new GuiMenu(usr);
+         mn.setVisible(true);
+         dispose();
+      }
+      else if (e.getSource() == mnuItSP){
+         Idiomas.changeIdioma(Idiomas.IDIOMASDISPONIVEIS.SP);
+         GuiMenu mn = new GuiMenu(usr);
+         mn.setVisible(true);
+         dispose();
       }
       
    }
