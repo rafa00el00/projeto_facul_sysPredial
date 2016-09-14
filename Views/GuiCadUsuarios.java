@@ -3,21 +3,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import languages.*;
+import Models.*;
 
 public class GuiCadUsuarios extends JDialog implements ActionListener{
-     
-   private JLabel lblCPF,lblNome,lblEmpresa,lblHoraEntra,lblHoraSaida, lblPrivilegio;
-   private JTextField txtCPF,txtNome,txtEmpresa,txtHorarioEntrada,txtHorarioSaida;
+    private JLabel lblCPF,lblNome,lblEmpresa,lblHoraEntra,lblHoraSaida, lblPrivilegio,lblLogin,lblPwd;
+   private JTextField txtCPF,txtNome,txtEmpresa,txtHorarioEntrada,txtHorarioSaida,txtLogin;
+   private JPasswordField txtPwd;
    private JComboBox cmbPrivilegio;
    private JButton btnOk,btnCancel;
    private String[] privilegio;
+   private Usuario usr;
+   
+   public GuiCadUsuarios(JFrame fr,boolean op,Usuario usr){
+      this(fr,op);
+      this.usr = usr;
+   }
 
    public GuiCadUsuarios(JFrame fr,boolean op){
       super(fr,true);
       setTitle(Idiomas.getString("GuiCadUsuario.title"));
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       setSize(250,400);
-      setLayout(new GridLayout(7,2,5,5));
+      setLayout(new GridLayout(11,2,5,5));
       
       
       lblCPF= new JLabel(Idiomas.getString("GuiCadUsuario.lblCPF"));
@@ -26,12 +33,16 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
       lblHoraEntra= new JLabel(Idiomas.getString("GuiCadUsuario.lblHoraEntra"));
       lblHoraSaida= new JLabel(Idiomas.getString("GuiCadUsuario.lblHoraSaida"));
       lblPrivilegio = new JLabel(Idiomas.getString("GuiCadUsuario.lblPrivilegio"));
+      lblPwd = new JLabel(Idiomas.getString("GuiCadUsuario.lblPwd"));
+      lblLogin = new JLabel(Idiomas.getString("GuiCadUsuario.lblLogin"));
       
       txtCPF = new JTextField();
       txtNome = new JTextField();
       txtEmpresa = new JTextField();
       txtHorarioEntrada = new JTextField();
       txtHorarioSaida = new JTextField();
+      txtLogin = new JTextField();
+      txtPwd = new JPasswordField();
       
       
       cmbPrivilegio = new JComboBox();
@@ -55,6 +66,10 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
       btnOk.addActionListener(this);
       btnCancel.addActionListener(this);
       
+      add(lblLogin);
+      add(txtLogin);
+      add(lblPwd);
+      add(txtPwd);
       add(lblCPF);
       add(txtCPF);
       add(lblNome);
@@ -76,8 +91,20 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
       if (e.getSource() == btnCancel){
       }
       else if(e.getSource() == btnOk){
+         if(usr == null){
+            usr = new Usuario();
+         }
+         
+         usr.setLogin(txtLogin.getText());
+         usr.setSenha(txtPwd.getText());
+         usr.setCPF(txtCPF.getText());
+         usr.setNome(txtNome.getText());
+         usr.setHoraAcesso(txtHorarioEntrada.getText());
+         usr.setHoraAcesso(txtHorarioSaida.getText());
+         usr.setPerfil(privilegio[cmbPrivilegio.getSelectedIndex()]);
+         
+         
       }
    
-   }
-   
+   }  
 }

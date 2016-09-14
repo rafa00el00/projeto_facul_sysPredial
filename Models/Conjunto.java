@@ -6,7 +6,7 @@ public class Conjunto extends IEntidade{
    
    private String nrConjunto;
    private String Andar;
-   private String Alugel;
+   private double Alugel;
    private int tamanho;
    private boolean ocupado;
    private Empresa empresa;
@@ -24,10 +24,10 @@ public class Conjunto extends IEntidade{
 	public void setAndar(String andar) {
 		Andar = andar;
 	}
-	public String getAlugel() {
+	public double getAlugel() {
 		return Alugel;
 	}
-	public void setAlugel(String alugel) {
+	public void setAlugel(double alugel) {
 		Alugel = alugel;
 	}
 	public int getTamanho() {
@@ -36,7 +36,7 @@ public class Conjunto extends IEntidade{
 	public void setTamanho(int tamanho) {
 		this.tamanho = tamanho;
 	}
-	public boolean isOcupado() {
+	public boolean getOcupado() {
 		return ocupado;
 	}
 	public void setOcupado(boolean ocupado) {

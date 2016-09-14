@@ -12,19 +12,19 @@ import Models.*;
 public class GuiUsuario extends GuiConsultar implements ActionListener{
    
    protected JButton btnEnviarConfg;
-   protected ArrayList<Funcionario> funcionarios;
+   protected ArrayList<Usuario> funcionarios;
    
    public GuiUsuario(){
       super(Idiomas.getString("GuiUsuario.title"));
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      funcionarios = new ArrayList<Funcionario>();
+      funcionarios = new ArrayList<Usuario>();
       btnEnviarConfg = new JButton("Enviar Configuração");
       //dados para teste
       Object[] colunas = {"CPF","Nome","Empresa","horário de acesso ","Privilegio"};
       Vector<Vector> dados = new Vector<Vector>();
       
       for (int i =0;i <=5;i++){
-         Funcionario fn = new Funcionario();
+         Usuario fn = new Usuario();
          fn.setCPF("CPF"+i);
          fn.setNome("N"+i);
          fn.setEmpresa(new Empresa("Cnpj"+i,"Empresa "+i));
@@ -34,7 +34,7 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
       }
       
       
-      for(Funcionario fn : funcionarios){
+      for(Usuario fn : funcionarios){
          Vector v = new Vector();
          v.add(fn.getCPF());
          v.add(fn.getNome());

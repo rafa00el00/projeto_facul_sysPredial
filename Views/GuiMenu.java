@@ -59,27 +59,29 @@ public class GuiMenu extends JFrame implements ActionListener{
       mnuItAlterarArCondicionado =  new JMenuItem(Idiomas.getString("GuiMenu.mnuArCondicionado.Alterar"));
       mnuItAlterarArCondicionado.addActionListener(this);
       mnuArCondicionado.add(mnuItAlterarArCondicionado);
-       //AddMenus
+        
+   
+   
+           //Idiomas
+      mnuIdiomas = new JMenu(Idiomas.getString("GuiMenu.mnuIdiomas"));
+      mnuIdiomas.setMnemonic(Idiomas.getString("GuiMenu.mnuIdiomas.mnemonico").charAt(0));
+      mnuItPT =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItPT"));
+      mnuItPT.addActionListener(this);
+      mnuIdiomas.add(mnuItPT);
+      mnuItEN =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItEN"));
+      mnuItEN.addActionListener(this);
+      mnuIdiomas.add(mnuItEN);
+      mnuItSP =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItSP"));
+      mnuItSP.addActionListener(this);
+      mnuIdiomas.add(mnuItSP);
+      
+      //AddMenus
       bar.add(mnuArquivo);
       bar.add(mnuUsuario);
       bar.add(mnuEmpresa);
       bar.add(mnuConjunto);
-      bar.add(mnuArCondicionado);  
-   
-   
-      if (user.getPerfil().equals("Gerente")){
-      //Idiomas
-         mnuIdiomas = new JMenu(Idiomas.getString("GuiMenu.mnuIdiomas"));
-         mnuIdiomas.setMnemonic(Idiomas.getString("GuiMenu.mnuIdiomas.mnemonico").charAt(0));
-         mnuItPT =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItPT"));
-         mnuItPT.addActionListener(this);
-         mnuIdiomas.add(mnuItPT);
-         mnuItEN =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItEN"));
-         mnuItEN.addActionListener(this);
-         mnuIdiomas.add(mnuItEN);
-         mnuItSP =  new JMenuItem(Idiomas.getString("GuiMenu.mnuIdiomas.mnuItSP"));
-         mnuItSP.addActionListener(this);
-         mnuIdiomas.add(mnuItSP);
+      bar.add(mnuArCondicionado); 
+      if (user.getPerfil().equals("AD")){
          bar.add(mnuIdiomas);
       }
       
