@@ -6,7 +6,7 @@ import languages.*;
 import Models.*;
 
 public class GuiCadUsuarios extends JDialog implements ActionListener{
-    private JLabel lblCPF,lblNome,lblEmpresa,lblHoraEntra,lblHoraSaida, lblPrivilegio,lblLogin,lblPwd;
+   private JLabel lblCPF,lblNome,lblEmpresa,lblHoraEntra,lblHoraSaida, lblPrivilegio,lblLogin,lblPwd;
    private JTextField txtCPF,txtNome,txtEmpresa,txtHorarioEntrada,txtHorarioSaida,txtLogin;
    private JPasswordField txtPwd;
    private JComboBox cmbPrivilegio;
@@ -17,6 +17,23 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
    public GuiCadUsuarios(JFrame fr,boolean op,Usuario usr){
       this(fr,op);
       this.usr = usr;
+      
+      txtLogin.setText(usr.getLogin());
+      txtPwd.setText(usr.getSenha());
+      txtCPF.setText(usr.getCPF());
+      txtNome.setText(usr.getNome());
+      txtHorarioEntrada.setText(usr.getHoraAcesso());
+      txtHorarioSaida.setText(usr.getHoraAcesso());
+      //privilegio
+      /*
+      if (usr.getPerfil() == "AD"){
+         cmbPrivilegio.setSelectedIndex(0);
+      }else if (usr.getPerfil() == "AT"){
+         cmbPrivilegio.setSelectedIndex(1);
+      }else if (usr.getPerfil() == "FN"){
+         cmbPrivilegio.setSelectedIndex(2);
+      }
+   */
    }
 
    public GuiCadUsuarios(JFrame fr,boolean op){

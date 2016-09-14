@@ -21,7 +21,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
       empresas = new ArrayList<Empresa>();
       
       //dados para teste
-      Object[] colunas = {"CNPJ","Razão Social","horário de funcionamento","ar-condicionado"};
+      Object[] colunas = {"CNPJ","Razão Social","horário de funcionamento","ar-condicionado","OBJ"};
                                  
       for (int i =0;i <=5;i++){
          Empresa ep = new Empresa();
@@ -40,6 +40,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
          v.add(ep.getRazaoSocial());
          v.add(String.format("%tD\n",ep.getHorarioFuncionamento()));
          v.add(ep.getTemperaturaPadrao() + " - " + String.format("%tT\n",ep.getHorarioArCondicionado()));
+         v.add(ep);
          dados.add(v);
       }
       

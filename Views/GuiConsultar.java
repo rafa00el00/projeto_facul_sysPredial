@@ -71,6 +71,8 @@ public abstract class GuiConsultar extends JFrame{
       }
 
       tblConsulta.setModel(dtm);
+      tblConsulta.getColumnModel().getColumn(tblConsulta.getColumnCount() - 1).setMaxWidth(0);
+    	tblConsulta.getColumnModel().getColumn(tblConsulta.getColumnCount() - 1).setMinWidth(0);
    }
 
 

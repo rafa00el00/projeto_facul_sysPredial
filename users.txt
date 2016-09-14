@@ -1,1 +1,1 @@
-Rafa:123:Gerente;Rafinha:123:Gerente;trote:456:Comum;
+Rafa:123:AD;Rafinha:123:AT;trote:456:FN;

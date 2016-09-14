@@ -20,7 +20,7 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
       funcionarios = new ArrayList<Usuario>();
       btnEnviarConfg = new JButton("Enviar Configuração");
       //dados para teste
-      Object[] colunas = {"CPF","Nome","Empresa","horário de acesso ","Privilegio"};
+      Object[] colunas = {"CPF","Nome","Empresa","horário de acesso ","Privilegio","OBJ"};
       Vector<Vector> dados = new Vector<Vector>();
       
       for (int i =0;i <=5;i++){
@@ -29,7 +29,7 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          fn.setNome("N"+i);
          fn.setEmpresa(new Empresa("Cnpj"+i,"Empresa "+i));
          fn.setHoraAcesso("H"+i);
-         fn.setPrivilegio("P"+i);
+         fn.setPrivilegio("P"+i);      
          funcionarios.add(fn);
       }
       
@@ -41,6 +41,7 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          v.add(fn.getEmpresa().getRazaoSocial());
          v.add(fn.getHoraAcesso());
          v.add(fn.getPrivilegio());
+         v.add(fn);
          dados.add(v);
       }
       
@@ -48,6 +49,8 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
       CarregaTabela(dados,colunas);
       
       btnNovo.addActionListener(this);
+      btnAlterar.addActionListener(this);
+      btnDeletar.addActionListener(this);
       pnlButtons.add(btnEnviarConfg);
       super.repaint();
    }
@@ -58,7 +61,8 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          cad.setVisible(true);
       }
       else if (e.getSource() == btnAlterar){
-         GuiCadUsuarios cad = new GuiCadUsuarios(this,true);
+         Usuario usr = (Usuario)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
+         GuiCadUsuarios cad = new GuiCadUsuarios(this,true,usr);
          cad.setVisible(true);
       }
       else if(e.getSource() == btnDeletar){
