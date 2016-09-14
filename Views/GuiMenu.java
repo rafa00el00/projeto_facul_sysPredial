@@ -15,7 +15,7 @@ public class GuiMenu extends JFrame implements ActionListener{
    
    public GuiMenu(Usuario user){
       super(Idiomas.getString("GuiMenu.title"));
-      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setSize(600,500);
       this.usr = user;
       

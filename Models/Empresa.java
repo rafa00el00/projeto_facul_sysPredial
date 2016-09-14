@@ -10,6 +10,14 @@ public class Empresa extends IEntidade{
    private int temperaturaPadrao;
    private Date horarioArCondicionado;
    
+   public Empresa(){
+   
+   }
+   public Empresa(String cnpj,String razaoSocial){
+      this.cnpj = cnpj;
+      this.razaoSocial = razaoSocial;
+   }
+   
    //Settes
    public void setCnpj(String cnpj)
    {
@@ -37,19 +45,19 @@ public class Empresa extends IEntidade{
    {
       return this.cnpj;
    }
-   public String setRazaoSocial()
+   public String getRazaoSocial()
    {
       return this.razaoSocial;
    }
-   public Date setHorarioFuncionamento()
+   public Date getHorarioFuncionamento()
    {
       return this.horarioFuncionamento;
    }
-   public int setTemperaturaPadrao()
+   public int getTemperaturaPadrao()
    {
       return this.temperaturaPadrao;
    }
-    public Date setHorarioArCondicionado()
+    public Date getHorarioArCondicionado()
    {
       return this.horarioArCondicionado;
    }

@@ -1,9 +1,10 @@
 package Views;
 import javax.swing.*;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.Event.*;
 import languages.*;
-
+import java.util.Vector;
 
 public abstract class GuiConsultar extends JFrame{
    
@@ -39,7 +40,7 @@ public abstract class GuiConsultar extends JFrame{
       pnlPesquisar.add(btnPesquisar,BorderLayout.EAST);
       
       //Botoes
-       pnlButtons = new JPanel();
+      pnlButtons = new JPanel();
       pnlButtons.setLayout(new GridLayout(9,1,5,5));
       btnNovo = new JButton(imgNovo);
       btnAlterar = new JButton(imgAlt);
@@ -57,6 +58,22 @@ public abstract class GuiConsultar extends JFrame{
       add(pnlButtons,BorderLayout.WEST);
    
    }
+   
+   protected void CarregaTabela(Vector<Vector> dados,Object[] colunas) {
+      DefaultTableModel dtm = new DefaultTableModel();
+      
+      for (int i = 0; i < colunas.length;i++){
+         dtm.addColumn(colunas[i]);
+      }
+      
+      for (Vector v : dados){
+         dtm.addRow(v);
+      }
+
+      tblConsulta.setModel(dtm);
+   }
+
+
    
    
 }
