@@ -1,66 +1,66 @@
 package Funcoes;
 import java.util.ArrayList;
 import javax.swing.*;
+import java.io.*;
+
 import Models.*;
 public class Login{
    
    
-   private StringBuilder txtArquivo;
-   private ManipulaTxt mnpTxt;
-   private ArrayList<String>  cadastro;
+   private String txtArquivo;
    private ArrayList<Usuario> usuarios;
+   private final String ArquivoLogin = "users.txt";
       
    public Login(){
-      mnpTxt = new ManipulaTxt("users.txt");
-      cadastro = new ArrayList<String>();
       usuarios = new ArrayList<Usuario>();
+      carregarLogins();
    }
    
-   
+   //Carrega o Arquivo de login
    public void carregarLogins(){
-      txtArquivo = mnpTxt.toStringBuilder();
-      String[] linhas, user;
-      linhas = txtArquivo.toString().split(";");
+      String[] linhas, user;//Variaveis auxiliares
+   
+      //Le o arquivo Criptografado
+      try{
+         ObjectInputStream ois = new ObjectInputStream (new FileInputStream (ArquivoLogin)); //Abre o arquivo
+         byte[] bArq = (byte[]) ois.readObject();//Objeto retorna byte[]
+         ois.close();//Fecha o arquivo para não ocupar memoria;
+            
+            //Descriptografia
+         Cryptografia crypt = new Cryptografia();
+         txtArquivo = (new String (crypt.desCriptografar(bArq),"ISO-8859-1"));
+      }
+      catch(Exception e){
+      //Por causa dos Throws
+         e.printStackTrace();
+      }
+      //; é o separador dos usuarios;
+      linhas = txtArquivo.split(";");
       usuarios.clear();
+      //Cria um array de Usuarios;
       for (int i = 0; i < linhas.length; i++){
-         user = linhas[i].split(":");
+         user = linhas[i].split(":");//: separador do campo
          usuarios.add(new Usuario(user[0],user[1],user[2]));
       }
       
    }
    
-   public void setLogin(String userName, String senha, String privilegio){
-      cadastro.add(userName.replace(":","").replace(";","") + ":" +
-                     senha.replace(":","").replace(";","") + ":" + 
-                     privilegio.replace(":","").replace(";","") + ";");
-      for (int i = 0;i < cadastro.size();i++){
-         mnpTxt.setText(cadastro.get(i));
-      }
-      mnpTxt.fecharArquivo();                     
-      JOptionPane.showMessageDialog(null,"Cadastrado!");
+   //Para adicionar login
+   public void addLogin(String userName, String senha, String privilegio){
+      usuarios.add(new Usuario(userName.replace(":","").replace(";","")
+                     ,senha.replace(":","").replace(";","")
+                     ,privilegio.replace(":","").replace(";","")));
    }
    
+   //Fazer Login
    public Usuario logar(String userName, String senha){
-      carregarLogins();
       Usuario[] us = usuarios.toArray(new Usuario[usuarios.size()]);
-      ordernarusuarios(us);
-      Usuario u = new Usuario(userName,senha,"");
+      ordernarusuarios(us);//ordena para busca binaria;
+      Usuario u = new Usuario(userName,senha,"");//Usuario a ser buscado
       return LoginBinario(us,u);
-      //return getLoginLinear(userName, senha);
    }
    
-   public Usuario getLoginLinear(String userName, String senha){
-      for (int i  = 0; i < usuarios.size();i++){
-         if (((Usuario) usuarios.get(i)).getLogin().equals(userName)){
-            if (((Usuario) usuarios.get(i)).getSenha().equals(senha)){
-               return ((Usuario) usuarios.get(i));
-            }
-            return null;
-         }
-      }
-      return null;
-   }
-   
+   //Ordena com selection Sort
    public void ordernarusuarios(Usuario[] usrs){
       //Ordena com selection Sort
       Usuario aux;
@@ -76,7 +76,7 @@ public class Login{
    
    }
    
-   
+   //busca binaria do Login
    public Usuario LoginBinario(Usuario[] usrs,Usuario uBusca){
       int ini =0;
       int fim = usrs.length;
@@ -100,6 +100,30 @@ public class Login{
       }
       return null;
    
+   }
+   
+   //Para salvar o arquivo alterado
+   public boolean salvarAlteracoes(){
+      String sUsuarios= "";
+      Cryptografia crypt = new Cryptografia();
+      try{
+      //Monta a string do arquivo
+         for (Usuario u : usuarios){
+            sUsuarios += u.getLogin() + ":"+ u.getSenha() + ":"+u.getPerfil() + ";";
+         }
+      
+      //Criptografa e Salva
+      
+         byte[] bArq = crypt.criptografar(sUsuarios);
+         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ArquivoLogin));//Cria um arquivo fisico na maquina
+         oos.writeObject(bArq);//passa o texto da chave
+         oos.close();
+      }
+      catch(Exception e){
+         e.printStackTrace();
+         return false;
+      }
+      return true;
    }
       
    
