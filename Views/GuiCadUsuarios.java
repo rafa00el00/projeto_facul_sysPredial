@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import languages.*;
 import Models.*;
+import Controllers.*;
 
 public class GuiCadUsuarios extends JDialog implements ActionListener{
    private JLabel lblCPF,lblNome,lblEmpresa,lblHoraEntra,lblHoraSaida, lblPrivilegio,lblLogin,lblPwd;

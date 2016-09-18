@@ -59,10 +59,23 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
          cad.setVisible(true);
       }
       else if (e.getSource() == btnAlterar){
-         GuiCadEmpresa cad = new GuiCadEmpresa(this,true);
+         if (tblConsulta.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null,"Por favor selecione um registro!");
+            return;
+         }
+         //Retorna o objeto de usuario da tabela
+         Empresa emp = (Empresa)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
+      
+         GuiCadEmpresa cad = new GuiCadEmpresa(this,true,emp);
          cad.setVisible(true);
       }
       else if(e.getSource() == btnDeletar){
+         if (tblConsulta.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null,"Por favor selecione um registro!");
+            return;
+         }
+         //Retorna o objeto de usuario da tabela
+         Empresa emp = (Empresa)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
       
       }
    }

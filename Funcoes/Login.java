@@ -10,6 +10,7 @@ public class Login{
    private String txtArquivo;
    private ArrayList<Usuario> usuarios;
    private final String ArquivoLogin = "users.txt";
+   private final String Chave = "chave.simetrica";
       
    public Login(){
       usuarios = new ArrayList<Usuario>();
@@ -28,7 +29,7 @@ public class Login{
             
             //Descriptografia
          Cryptografia crypt = new Cryptografia();
-         txtArquivo = (new String (crypt.desCriptografar(bArq),"ISO-8859-1"));
+         txtArquivo = (new String (crypt.desCriptografar(bArq,Chave),"ISO-8859-1"));
       }
       catch(Exception e){
       //Por causa dos Throws
@@ -113,8 +114,8 @@ public class Login{
          }
       
       //Criptografa e Salva
-      
-         byte[] bArq = crypt.criptografar(sUsuarios);
+         crypt.gerarChave(Chave);
+         byte[] bArq = crypt.criptografar(sUsuarios,Chave);
          ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ArquivoLogin));//Cria um arquivo fisico na maquina
          oos.writeObject(bArq);//passa o texto da chave
          oos.close();

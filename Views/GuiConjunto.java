@@ -20,7 +20,7 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
       //dados para teste
-      Object[] colunas = {"Conjunto","Andar","preco alugel","tamanho","ocupado"};
+      Object[] colunas = {"Conjunto","Andar","preco alugel","tamanho","ocupado","OBJ"};
                                  
 
       Vector<Vector> dados = new Vector<Vector>();
@@ -31,7 +31,7 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
          v.add(cj.getAlugel());
          v.add(cj.getTamanho());
          v.add(cj.getOcupado());
-         
+         v.add(cj);
          dados.add(v);
       }
 
@@ -49,6 +49,12 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
          cad.setVisible(true);
       }
       else if (e.getSource() == btnAlterar){
+          if (tblConsulta.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null,"Por favor selecione um registro!");
+            return;
+         }
+         //Retorna o objeto de usuario da tabela
+         Conjunto coj = (Conjunto)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
          GuiCadConjunto cad = new GuiCadConjunto(this,true);
          cad.setVisible(true);
       }

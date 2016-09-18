@@ -3,8 +3,19 @@ import java.io.*;
 
 public class Cryptografia{
 
+//"chave.simetrica"
+   public void gerarChave(String nomeArquivo){
+      CryptoAES caes = new CryptoAES();
+      try{
+      caes.geraChave(new File(nomeArquivo));
+      }
+      catch(Exception e){
+         e.printStackTrace();
+      }
+
+   }
    //----------Criptografar o arquivo
-   public byte[] criptografar(String sMsgClara){
+   public byte[] criptografar(String sMsgClara,String nomeChave){
       byte[] bMsgClara = null;
       try{
       // Converte o texto String dado no equivalente byte[]
@@ -14,8 +25,8 @@ public class Cryptografia{
          CryptoAES caes = new CryptoAES();
       
          // Gera a Chave criptografica AES simetrica e o nome do arquivo onde será armazenada
-         caes.geraChave(new File("chave.simetrica"));
-         caes.geraCifra(bMsgClara,new File("chave.simetrica"));
+         
+         caes.geraCifra(bMsgClara,new File(nomeChave));
          return   caes.getTextoCifrado();
       }
       catch(Exception e){
@@ -24,11 +35,11 @@ public class Cryptografia{
       return null   ;
    }
    //----------DesCriptografar o arquivo
-   public byte[] desCriptografar(byte[] bMsgCifrada){
+   public byte[] desCriptografar(byte[] bMsgCifrada,String nomeChave){
       CryptoAES caes = new CryptoAES();
       try{
          // Gera a decifra AES da mensagem dada, segundo a chave simetrica gerada
-         caes.geraDecifra(bMsgCifrada, new File ("chave.simetrica"));
+         caes.geraDecifra(bMsgCifrada, new File (nomeChave));
          
          // recebe o texto decifrado
          return caes.getTextoDecifrado();

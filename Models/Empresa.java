@@ -9,6 +9,7 @@ public class Empresa extends IEntidade{
    private Date horarioFuncionamento;
    private int temperaturaPadrao;
    private Date horarioArCondicionado;
+   private Conjunto cj;
    
    public Empresa(){
    

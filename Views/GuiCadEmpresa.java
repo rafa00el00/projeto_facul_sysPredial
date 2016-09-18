@@ -3,12 +3,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import languages.*;
+import Models.*;
 
 public class GuiCadEmpresa extends JDialog implements ActionListener{
      
    private JLabel lblCNPJ, lblRazaoSocial, lblConjunto, lblhorafuncionamento, lblArcondicionado;
    private JTextField txtCNPJ, txtRazaoSocial, txtConjunto, txthorafuncionamento, txtArcondicionado;
    private JButton btnOk,btnCancel;
+
+   public GuiCadEmpresa(JFrame fr,boolean op,Empresa emp){
+      this(fr,op);
+      txtCNPJ.setText(emp.getCNPJ());
+      txtRazaoSocial.setText(emp.getRazaoSocial());
+      txtConjunto.setText(emp.getCNPJ());
+      txthorafuncionamento.setText(emp.getHorarioFuncionamento());
+      txtArcondicionado.setText(emp.getTemperaturaPadrao());
+
+      
+   }
 
    public GuiCadEmpresa(JFrame fr,boolean op){
       super(fr,true);

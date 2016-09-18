@@ -61,11 +61,27 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          cad.setVisible(true);
       }
       else if (e.getSource() == btnAlterar){
+         if (tblConsulta.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null,"Por favor selecione um registro!");
+            return;
+         }
+         //Retorna o objeto de usuario da tabela
          Usuario usr = (Usuario)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
          GuiCadUsuarios cad = new GuiCadUsuarios(this,true,usr);
          cad.setVisible(true);
       }
       else if(e.getSource() == btnDeletar){
+         if (tblConsulta.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null,"Por favor selecione um registro!");
+            return;
+         }
+         //Retorna o objeto de usuario da tabela
+         Usuario usr = (Usuario)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
+         //int resp = JOptionPane.showCofirmDialog("Deseja realmente deletar o Usuario " + usr.getNome() + "?");
+         
+         /*
+         *implementar o deletar
+         */
       
       }
    }
