@@ -13,7 +13,8 @@ import Models.*;
 public class GuiEmpresa extends GuiConsultar implements ActionListener{
    
    private ArrayList<Empresa> empresas;
-   
+   private Object[] colunas = {"CNPJ","Razão Social","horário de funcionamento","ar-condicionado","OBJ"};
+
    public GuiEmpresa(){
       super(Idiomas.getString("GuiEmpresa.title"));
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -21,8 +22,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
       empresas = new ArrayList<Empresa>();
       
       //dados para teste
-      Object[] colunas = {"CNPJ","Razão Social","horário de funcionamento","ar-condicionado","OBJ"};
-                                 
+                                       
       for (int i =0;i <=5;i++){
          Empresa ep = new Empresa();
          ep.setCnpj("CNPJ"+i);
@@ -32,8 +32,18 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
          ep.setHorarioArCondicionado(new Date());
          empresas.add(ep);
       }
+   atualizarTabela(empresas);
+            
+      
+      btnNovo.addActionListener(this);
+      btnAlterar.addActionListener(this);
+      btnDeletar.addActionListener(this);
+      super.repaint();
+   }
    
-      Vector<Vector> dados = new Vector<Vector>();
+   public void atualizarTabela(ArrayList list){
+      ArrayList<Usuario> listU = list;
+       Vector<Vector> dados = new Vector<Vector>();
       for(Empresa ep : empresas){
          Vector v = new Vector();
          v.add(ep.getCnpj());
@@ -46,13 +56,11 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
       
                            
       CarregaTabela(dados,colunas);
-      
-      
-      btnNovo.addActionListener(this);
-      btnAlterar.addActionListener(this);
-      btnDeletar.addActionListener(this);
-      super.repaint();
+
    }
+
+   
+   
    public void actionPerformed(ActionEvent e){
       if (e.getSource() == btnNovo){
          GuiCadEmpresa cad = new GuiCadEmpresa(this,false);

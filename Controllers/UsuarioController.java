@@ -11,7 +11,8 @@ public abstract class UsuarioController{
    private static ArrayList<Usuario> usuarios;
    
    public static void init(){
-      usuarios = (new UsuarioDao()).consultarTodos(new Usuario());
+      //usuarios = (new UsuarioDao()).consultarTodos(new Usuario());
+     usuarios = new ArrayList<Usuario>();
    }
    
    public static void consultar(){

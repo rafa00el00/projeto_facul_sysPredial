@@ -18,7 +18,7 @@ public class Usuario extends IEntidade{
       setLogin(login);
       setSenha(senha);
       setPerfil(perfil);
-      dao = new UsuarioDao();
+      //dao = new UsuarioDao();
    }
    
    public Usuario(){

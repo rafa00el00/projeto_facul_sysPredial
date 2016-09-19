@@ -13,11 +13,11 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
 
    public GuiCadEmpresa(JFrame fr,boolean op,Empresa emp){
       this(fr,op);
-      txtCNPJ.setText(emp.getCNPJ());
+      txtCNPJ.setText(emp.getCnpj());
       txtRazaoSocial.setText(emp.getRazaoSocial());
-      txtConjunto.setText(emp.getCNPJ());
-      txthorafuncionamento.setText(emp.getHorarioFuncionamento());
-      txtArcondicionado.setText(emp.getTemperaturaPadrao());
+      txtConjunto.setText(emp.getCnpj());
+      txthorafuncionamento.setText(emp.getHorarioFuncionamento().toString());
+      txtArcondicionado.setText(emp.getTemperaturaPadrao()+ "");
 
       
    }

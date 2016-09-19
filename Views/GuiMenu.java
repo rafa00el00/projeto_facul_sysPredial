@@ -102,7 +102,7 @@ public class GuiMenu extends JFrame implements ActionListener{
          System.exit(0);
       }
       else if (e.getSource() == mnuItConsultarUsuario){
-         UsuarioController.consultar()
+         UsuarioController.consultar();
       }
       else if (e.getSource() == mnuItConsultarEmpresa){
          GuiEmpresa usr = new GuiEmpresa();
