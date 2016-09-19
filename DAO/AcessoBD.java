@@ -5,7 +5,7 @@ import java.sql.SQLException;
 /**
 * Classe responsável pela conexão com banco de dados MySQL
 */
-public class AcessoBD
+public abstract class AcessoBD
 {
 // -----------------------------------------------------------
 // Carrega driver JDBC
@@ -23,7 +23,7 @@ public class AcessoBD
    }
 // -----------------------------------------------------------
 // Obtém conexão com o banco de dados
-   public Connection obtemConexao() throws SQLException
+   public static Connection getInstance() throws SQLException
    {
       return DriverManager.getConnection
          (

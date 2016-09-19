@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.Event.*;
 import languages.*;
 import java.util.Vector;
+import java.util.ArrayList;
 
 public abstract class GuiConsultar extends JFrame{
    
@@ -74,6 +75,8 @@ public abstract class GuiConsultar extends JFrame{
       tblConsulta.getColumnModel().getColumn(tblConsulta.getColumnCount() - 1).setMaxWidth(0);
     	tblConsulta.getColumnModel().getColumn(tblConsulta.getColumnCount() - 1).setMinWidth(0);
    }
+   
+   public abstract void atualizarTabela(ArrayList list);
 
 
    

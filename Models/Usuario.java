@@ -1,6 +1,7 @@
 package Models;
 import java.util.ArrayList;
 import Interfaces.*;
+import DAO.*;
 public class Usuario extends IEntidade{
 
    private String login;
@@ -10,18 +11,18 @@ public class Usuario extends IEntidade{
    private String nome;
    private Empresa empresa;
    private String horaAcesso;
-   private String privilegio; 
+   private String horaSaida; 
+   private UsuarioDao dao;
    
    public Usuario(String login,String senha,String perfil){
       setLogin(login);
       setSenha(senha);
       setPerfil(perfil);
+      dao = new UsuarioDao();
    }
    
    public Usuario(){
-      setLogin("");
-      setSenha("");
-      setPerfil("");
+      this("","","");
    }
    
    //Settes
@@ -76,11 +77,11 @@ public class Usuario extends IEntidade{
    public void setHoraAcesso(String horaAcesso) {
       this.horaAcesso = horaAcesso;
    }
-   public String getPrivilegio() {
-      return privilegio;
+   public String getHoraSaida() {
+      return horaSaida;
    }
-   public void setPrivilegio(String privilegio) {
-      this.privilegio = privilegio;
+   public void setHoraSaida(String horaSaida) {
+      this.horaSaida = horaSaida;
    }
 
    
@@ -88,6 +89,18 @@ public class Usuario extends IEntidade{
    //Metodos
    public boolean fazerlogin(){
       return false;
+   }
+   
+   public void incluir(){
+      dao.incluir(this);          
+   }
+   
+    public void alterar(){
+      dao.alterar(this);          
+   }
+   
+   public void consultar(){
+      dao.consultar(this);          
    }
    
    

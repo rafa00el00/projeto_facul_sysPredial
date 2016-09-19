@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import languages.*;
 import Models.*;
+import Controllers.*;
 
 public class GuiMenu extends JFrame implements ActionListener{
    
@@ -86,13 +87,13 @@ public class GuiMenu extends JFrame implements ActionListener{
       }
       
       
-     
-   
-      
       ImageIcon img = new ImageIcon(getClass().getResource("../imgs/fundo.png"));
       lblFundo = new JLabel(img);
       
       add(lblFundo);
+      
+      //Controllers
+      UsuarioController.init();
    }
    
    public void actionPerformed( ActionEvent e ) {
@@ -101,8 +102,7 @@ public class GuiMenu extends JFrame implements ActionListener{
          System.exit(0);
       }
       else if (e.getSource() == mnuItConsultarUsuario){
-         GuiUsuario usr = new GuiUsuario();
-         usr.setVisible(true);
+         UsuarioController.consultar()
       }
       else if (e.getSource() == mnuItConsultarEmpresa){
          GuiEmpresa usr = new GuiEmpresa();

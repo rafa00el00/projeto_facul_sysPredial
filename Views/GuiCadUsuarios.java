@@ -121,6 +121,11 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
          usr.setHoraAcesso(txtHorarioSaida.getText());
          usr.setPerfil(privilegio[cmbPrivilegio.getSelectedIndex()]);
          
+         if(usr.getId()==0){
+            //alterar
+         }else{
+            //cadastrar
+         }
          
       }
    

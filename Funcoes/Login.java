@@ -46,12 +46,17 @@ public class Login{
       
    }
    
+   
    //Para adicionar login
    public void addLogin(String userName, String senha, String privilegio){
-      usuarios.add(new Usuario(userName.replace(":","").replace(";","")
+      addLogin(new Usuario(userName.replace(":","").replace(";","")
                      ,senha.replace(":","").replace(";","")
                      ,privilegio.replace(":","").replace(";","")));
    }
+   public void addLogin(Usuario usr){
+      usuarios.add(usr);
+   }
+   
    
    //Fazer Login
    public Usuario logar(String userName, String senha){

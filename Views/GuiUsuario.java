@@ -12,16 +12,15 @@ import Models.*;
 public class GuiUsuario extends GuiConsultar implements ActionListener{
    
    protected JButton btnEnviarConfg;
-   protected ArrayList<Usuario> funcionarios;
+   private Object[] colunas = {"CPF","Nome","Empresa","horário de acesso ","Privilegio","OBJ"};
+
    
-   public GuiUsuario(){
+   public GuiUsuario(ArrayList<Usuario> funcionarios){
       super(Idiomas.getString("GuiUsuario.title"));
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      funcionarios = new ArrayList<Usuario>();
       btnEnviarConfg = new JButton("Enviar Configuração");
       //dados para teste
-      Object[] colunas = {"CPF","Nome","Empresa","horário de acesso ","Privilegio","OBJ"};
-      Vector<Vector> dados = new Vector<Vector>();
+           
       
       for (int i =0;i <=5;i++){
          Usuario fn = new Usuario();
@@ -29,30 +28,35 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          fn.setNome("N"+i);
          fn.setEmpresa(new Empresa("Cnpj"+i,"Empresa "+i));
          fn.setHoraAcesso("H"+i);
-         fn.setPrivilegio("P"+i);      
+         fn.setHoraSaida("S"+i);      
          funcionarios.add(fn);
       }
       
       
-      for(Usuario fn : funcionarios){
-         Vector v = new Vector();
-         v.add(fn.getCPF());
-         v.add(fn.getNome());
-         v.add(fn.getEmpresa().getRazaoSocial());
-         v.add(fn.getHoraAcesso());
-         v.add(fn.getPrivilegio());
-         v.add(fn);
-         dados.add(v);
-      }
-      
-                           
-      CarregaTabela(dados,colunas);
+      atualizarTabela(funcionarios);
       
       btnNovo.addActionListener(this);
       btnAlterar.addActionListener(this);
       btnDeletar.addActionListener(this);
       pnlButtons.add(btnEnviarConfg);
       super.repaint();
+   }
+   
+   public void atualizarTabela(ArrayList list){
+      ArrayList<Usuario> listU = list;
+       Vector<Vector> dados = new Vector<Vector>();
+      for(Usuario fn : listU){
+         Vector v = new Vector();
+         v.add(fn.getCPF());
+         v.add(fn.getNome());
+         v.add(fn.getEmpresa().getRazaoSocial());
+         v.add(fn.getHoraAcesso());
+         v.add(fn.getHoraSaida());
+         v.add(fn);
+         dados.add(v);
+      }
+      CarregaTabela(dados,colunas);
+
    }
    
    public void actionPerformed(ActionEvent e){
