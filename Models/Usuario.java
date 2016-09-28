@@ -102,6 +102,7 @@ public class Usuario extends IEntidade{
    public void consultar(){
       dao.consultar(this);          
    }
-   
+
+   public void deletar(){ }
    
 }

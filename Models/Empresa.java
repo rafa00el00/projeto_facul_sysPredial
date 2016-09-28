@@ -14,54 +14,68 @@ public class Empresa extends IEntidade{
    private Conjunto cj;
    
    public Empresa(){
-   
+      this("","");
    }
    public Empresa(String cnpj,String razaoSocial){
       this.cnpj = cnpj;
       this.razaoSocial = razaoSocial;
    }
    
-   //Settes
-   public void setCnpj(String cnpj)
-   {
-      this.cnpj = cnpj;
-   }
-   public void setRazaoSocial(String razaoSocial)
-   {
-      this.razaoSocial = razaoSocial;
-   }
-   public void setHorarioFuncionamento(Date horarioFuncionamento)
-   {
-      this.horarioFuncionamento = horarioFuncionamento;
-   }
-   public void setTemperaturaPadrao(int temperaturaPadrao)
-   {
-      this.temperaturaPadrao = temperaturaPadrao;
-   }
-   public void setHorarioArCondicionado(Date horarioArCondicionado)
-   {
-      this.horarioArCondicionado = horarioArCondicionado;
-   }
+   //getters e Settes
+   public String getCnpj() {
+		return cnpj;
+	}
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+	public Date getHorarioAbertura() {
+		return horarioAbertura;
+	}
+	public void setHorarioAbertura(Date horarioAbertura) {
+		this.horarioAbertura = horarioAbertura;
+	}
+	public Date getHorarioFechamento() {
+		return horarioFechamento;
+	}
+	public void setHorarioFechamento(Date horarioFechamento) {
+		this.horarioFechamento = horarioFechamento;
+	}
+	public int getTemperaturaPadrao() {
+		return temperaturaPadrao;
+	}
+	public void setTemperaturaPadrao(int temperaturaPadrao) {
+		this.temperaturaPadrao = temperaturaPadrao;
+	}
+	public Date getHoraIniAr() {
+		return horaIniAr;
+	}
+	public void setHoraIniAr(Date horaIniAr) {
+		this.horaIniAr = horaIniAr;
+	}
+	public Date getHoraFimAr() {
+		return horaFimAr;
+	}
+	public void setHoraFimAr(Date horaFimAr) {
+		this.horaFimAr = horaFimAr;
+	}
+	public Conjunto getCj() {
+		return cj;
+	}
+	public void setCj(Conjunto cj) {
+		this.cj = cj;
+	}
+	
    
-   //Getters
-   public String getCnpj()
-   {
-      return this.cnpj;
-   }
-   public String getRazaoSocial()
-   {
-      return this.razaoSocial;
-   }
-   public Date getHorarioFuncionamento()
-   {
-      return this.horarioFuncionamento;
-   }
-   public int getTemperaturaPadrao()
-   {
-      return this.temperaturaPadrao;
-   }
-    public Date getHorarioArCondicionado()
-   {
-      return this.horarioArCondicionado;
-   }
+   public void inserir(){ }
+   public void alterar(){ }
+   public void consultar(){ }
+   public void deletar(){ }
+	
+	
 }

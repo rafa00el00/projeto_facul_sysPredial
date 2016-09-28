@@ -6,39 +6,29 @@ public class RegistroAcesso extends IEntidade{
    
    private Date dataAcesso;
    private String tipo;
-
    
-   //Settes
-   public void setDataEntrada(Date dataEntrada)
-   {
-      this.dataEntrada = dataEntrada;
-   }
-   public void setHoraEntrada(Date horaEntrada)
-   {
-      this.horaEntrada = horaEntrada;
-   }
-   public void setHoraSaida(Date horaSaida)
-   {
-      this.horaSaida = horaSaida;
-   }
-   
-   //Getters
-   public Date getDataEntrada()
-   {
-      return this.dataEntrada;
-   }
-   public Date getHoraEntrada()
-   {
-      return this.horaEntrada;
-   }
-   public Date getHoraSaida()
-   {
-      return this.horaSaida;
-   }
 
+   public Date getDataAcesso() {
+		return dataAcesso;
+	}
+	public void setDataAcesso(Date dataAcesso) {
+		this.dataAcesso = dataAcesso;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+   
    //Metodos
    public void enviarArquivo(){
    
    }
+      public void controlarAcesso(){ }
+   public void consultar(){ }
+
+   
+
 
 }
