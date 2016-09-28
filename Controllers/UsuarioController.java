@@ -50,5 +50,14 @@ public abstract class UsuarioController{
       }
       return true;
    }
+   
+   public static void alterar(Usuario usr){
+      usr.alterar();
+   }
+   
+   public static void deletar(Usuario usr){
+      usr.deletar();
+   }   
+
 
 }

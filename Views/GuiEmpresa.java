@@ -21,17 +21,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
       
       empresas = new ArrayList<Empresa>();
       
-      //dados para teste
-                                       
-      for (int i =0;i <=5;i++){
-         Empresa ep = new Empresa();
-         ep.setCnpj("CNPJ"+i);
-         ep.setRazaoSocial("N"+i);
-         ep.setHorarioFuncionamento(new Date());
-         ep.setTemperaturaPadrao(i);
-         ep.setHorarioArCondicionado(new Date());
-         empresas.add(ep);
-      }
+      
    atualizarTabela(empresas);
             
       

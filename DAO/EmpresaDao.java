@@ -1,4 +1,5 @@
 package DAO;
+import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,33 +9,37 @@ import Models.*;
 import Interfaces.*;
 import Funcoes.*;
 
-public class UsuarioDao extends AbstractDao{
+public class EmpresaDao extends AbstractDao{
 
-   public UsuarioDao(){
+   public EmpresaDao(){
       super();
    }
 
    //incluir
-   public void incluir(Usuario usr)
+   public void incluir(Empresa empresa)
    {
    
-      String sqlInsert = "INSERT INTO Usuario("
-         +"login"
-         +",CPF"
-         +",empresa_id"
-         +",horaAcesso"
-         +",horaSaida"
+      String sqlInsert = "INSERT INTO Empresa("
+         +"CNPJ"
+         +",RAZAOSOCIAL"
+         +",TemperaturaAr"
+         +",horaAbertura"
+         +",horaFechamento"
+         +",horaIniAr"
+         +",horaFimAr"
          +")"
-         +" VALUES (?, ?, ?, ?, ?)";
+         +" VALUES (?, ?, ?, ?, ?,?,?)";
       PreparedStatement stm = null;
       try
       {
          stm = conn.prepareStatement(sqlInsert);
-         stm.setString(1, usr.getLogin());
-         stm.setString(2, usr.getCPF());
-         stm.setInt(3, usr.getEmpresa().getId());
-         stm.setString(4, usr.getHoraAcesso());
-         stm.setString(5, usr.getHoraSaida());
+         stm.setString(1, empresa.getCnpj());
+         stm.setString(2, empresa.getRazaoSocial());
+         stm.setInt(3, empresa.getTemperaturaPadrao());
+         stm.setDate(4, (Date) empresa.getHorarioAbertura());
+         stm.setDate(4, (Date) empresa.getHorarioFechamento());
+         stm.setDate(4, (Date) empresa.getHoraIniAr());
+         stm.setDate(4, (Date) empresa.getHoraFimAr());
          stm.execute();
       }
       catch (Exception e)
@@ -66,28 +71,32 @@ public class UsuarioDao extends AbstractDao{
    }
    
    //alterar
-   public void alterar(Usuario usr)
+   public void alterar(Empresa empresa)
    {
    
-      String sqlInsert = "Update Usuario("
-         +"login = ?"
-         +",CPF = ?"
-         +",empresa_id = ?"
-         +",horaAcesso = ?"
-         +",horaSaida = ?"
-         +")"
+      String sqlInsert = "Update Empresa "
+    		  +"CNPJ = ?"
+    	      +",RAZAOSOCIAL = ?"
+    	      +",TemperaturaAr = ?"
+    	      +",horaAbertura = ?"
+    	      +",horaFechamento = ?"
+    	      +",horaIniAr = ?"
+    	      +",horaFimAr = ?"
+         +""
          +" where id = ?";
          
       PreparedStatement stm = null;
       try
       {
          stm = conn.prepareStatement(sqlInsert);
-         stm.setString(1, usr.getLogin());
-         stm.setString(2, usr.getCPF());
-         stm.setInt(3, usr.getEmpresa().getId());
-         stm.setString(4, usr.getHoraAcesso());
-         stm.setString(5, usr.getHoraSaida());
-         stm.setInt(6, usr.getId());
+         stm.setString(1, empresa.getCnpj());
+         stm.setString(2, empresa.getRazaoSocial());
+         stm.setInt(3, empresa.getTemperaturaPadrao());
+         stm.setDate(4, (Date) empresa.getHorarioAbertura());
+         stm.setDate(5, (Date) empresa.getHorarioFechamento());
+         stm.setDate(6, (Date) empresa.getHoraIniAr());
+         stm.setDate(7, (Date) empresa.getHoraFimAr());
+         stm.setInt(3, empresa.getTemperaturaPadrao());
          stm.execute();
       }
       catch (Exception e)
@@ -119,14 +128,13 @@ public class UsuarioDao extends AbstractDao{
    }
    
    //Consultar
-   public Usuario consultar(IEntidade entidade)
+   public Empresa consultar(IEntidade entidade)
    {
-      String sqlSelect = "SELECT * FROM Usuario";
-      Usuario usr;
-      if (entidade instanceof Usuario){
+      String sqlSelect = "SELECT * FROM Empresa";
+       if (entidade instanceof Empresa){
          sqlSelect += " where id = ?";
       }
-       usr= new Usuario();
+       
 
       PreparedStatement stm = null;
       ResultSet rs = null;
@@ -141,14 +149,14 @@ public class UsuarioDao extends AbstractDao{
                  while (rs.next())
          {
             
-            usr.setId(rs.getInt("id"));
-            usr.setCPF(rs.getString("cpf"));
-            usr.setLogin(rs.getString("login"));
-            usr.setNome(rs.getString("nome"));
-            usr.setEmpresa(new Empresa());
-            usr.getEmpresa().setId(rs.getInt("empresa_id"));
-            usr.setHoraAcesso(rs.getString("horaAcesso"));
-            usr.setHoraSaida(rs.getString("horaSaida"));
+            empresa.setId(rs.getInt("id"));
+            empresa.setCnpj(rs.getString("cpf"));
+            empresa.setRazaoSocial (rs.getString("login"));
+            empresa.setTemperaturaPadrao(rs.getInt("nome"));
+            empresa.setHorarioAbertura(rs.getDate("empresa_id"));
+            empresa.setHorarioFechamento(rs.getDate("empresa_id"));
+            empresa.setHoraIniAr(rs.getDate("empresa_id"));
+            empresa.setHoraFimAr(rs.getDate("empresa_id"));
                   
             
          }
@@ -179,18 +187,18 @@ public class UsuarioDao extends AbstractDao{
             }
          }
       }
-      return (usr);
+      return (empresa);
    }
    
    //Consultar
-   public MyList<Usuario> consultarTodos(IEntidade entidade)
+   public MyList<Empresa> consultarTodos(IEntidade entidade)
    {
-      String sqlSelect = "SELECT * FROM Usuario";
-      MyList<Usuario> usuarios = new MyList<Usuario>();
-      Usuario usr;
-      if (entidade instanceof Empresa){
-         sqlSelect += " where empresa_id = ?";
-      }
+      String sqlSelect = "SELECT * FROM Empresa";
+      MyList<Empresa> empresas = new MyList<Empresa>();
+      
+     /* if (entidade instanceof Empresa){
+         sqlSelect += " where id = ?";
+      }*/
        
 
       PreparedStatement stm = null;
@@ -199,24 +207,24 @@ public class UsuarioDao extends AbstractDao{
       try
       {
          stm = conn.prepareStatement(sqlSelect);
-         if (entidade instanceof Usuario){
+         /*if (entidade instanceof Usuario){
             //traz todos
          }else if (entidade instanceof Empresa){
             stm.setInt(1,((Empresa)entidade).getId());
-         }
+         }*/
          rs = stm.executeQuery();
          while (rs.next())
          {
-            usr= new Usuario();
-            usr.setId(rs.getInt("id"));
-            usr.setCPF(rs.getString("cpf"));
-            usr.setLogin(rs.getString("login"));
-            usr.setNome(rs.getString("nome"));
-            usr.setEmpresa(new Empresa());
-            usr.getEmpresa().setId(rs.getInt("empresa_id"));
-            usr.setHoraAcesso(rs.getString("horaAcesso"));
-            usr.setHoraSaida(rs.getString("horaSaida"));
-             usuarios.add(usr);     
+            empresa = new Empresa();
+          empresa.setId(rs.getInt("id"));
+            empresa.setCnpj(rs.getString("cpf"));
+            empresa.setRazaoSocial (rs.getString("login"));
+            empresa.setTemperaturaPadrao(rs.getInt("nome"));
+            empresa.setHorarioAbertura(rs.getDate("empresa_id"));
+            empresa.setHorarioFechamento(rs.getDate("empresa_id"));
+            empresa.setHoraIniAr(rs.getDate("empresa_id"));
+            empresa.setHoraFimAr(rs.getDate("empresa_id"));
+             empresas.add(empresa);     
             
          }
       }
@@ -246,7 +254,7 @@ public class UsuarioDao extends AbstractDao{
             }
          }
       }
-      return usuarios;
+      return empresas;
    }
 
 
