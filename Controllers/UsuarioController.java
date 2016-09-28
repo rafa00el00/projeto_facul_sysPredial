@@ -8,20 +8,31 @@ import Views.*;
 
 public abstract class UsuarioController{
    
-   private static ArrayList<Usuario> usuarios;
+   private static MyList<Usuario> usuarios;
    
    public static void init(){
       //usuarios = (new UsuarioDao()).consultarTodos(new Usuario());
-     usuarios = new ArrayList<Usuario>();
+     usuarios = new MyList<Usuario>();
    }
    
    public static void consultar(){
+            
+      for (int i =0;i <=5;i++){
+         Usuario fn = new Usuario();
+         fn.setCPF("CPF"+i);
+         fn.setNome("N"+i);
+         fn.setEmpresa(new Empresa("Cnpj"+i,"Empresa "+i));
+         fn.setHoraAcesso("H"+i);
+         fn.setHoraSaida("S"+i);      
+         usuarios.add(fn);
+      }
+
       GuiUsuario usr = new GuiUsuario(usuarios);
       usr.setVisible(true);
    }
    
    public static void consultar(String pesquisa,GuiConsultar gui){
-      gui.atualizarTabela(usuarios);
+      gui.atualizarTabela(usuarios.find(e->e.getNome().contains(pesquisa)));
    }
    
    public static boolean incluir(Usuario usr){

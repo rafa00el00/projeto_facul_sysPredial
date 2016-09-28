@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import languages.*;
 import Models.*;
+import Funcoes.*;
 
 
 public class GuiUsuario extends GuiConsultar implements ActionListener{
@@ -15,23 +16,12 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
    private Object[] colunas = {"CPF","Nome","Empresa","horário de acesso ","Privilegio","OBJ"};
 
    
-   public GuiUsuario(ArrayList<Usuario> funcionarios){
+   public GuiUsuario(MyList<Usuario> funcionarios){
       super(Idiomas.getString("GuiUsuario.title"));
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       btnEnviarConfg = new JButton("Enviar Configuração");
       //dados para teste
-           
-      
-      for (int i =0;i <=5;i++){
-         Usuario fn = new Usuario();
-         fn.setCPF("CPF"+i);
-         fn.setNome("N"+i);
-         fn.setEmpresa(new Empresa("Cnpj"+i,"Empresa "+i));
-         fn.setHoraAcesso("H"+i);
-         fn.setHoraSaida("S"+i);      
-         funcionarios.add(fn);
-      }
-      
+             
       
       atualizarTabela(funcionarios);
       
@@ -42,8 +32,8 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
       super.repaint();
    }
    
-   public void atualizarTabela(ArrayList list){
-      ArrayList<Usuario> listU = list;
+   public void atualizarTabela(MyList list){
+      MyList<Usuario> listU = list;
        Vector<Vector> dados = new Vector<Vector>();
       for(Usuario fn : listU){
          Vector v = new Vector();

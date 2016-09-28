@@ -1,6 +1,7 @@
 import Funcoes.*;
 import Views.*;
 import languages.*;
+import Models.*;
 
 import javax.crypto.*;
 import javax.crypto.spec.*;
@@ -10,9 +11,10 @@ import java.io.*;
 public class Inicio{
    
    public static void main(String args[]){
-     Idiomas.iniciar();
+      Idiomas.iniciar();
       GuiLogin lg = new GuiLogin(null);
-      lg.setVisible(true);         
+      lg.setVisible(true);  
+             
    }
 
 }
