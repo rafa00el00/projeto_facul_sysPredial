@@ -15,5 +15,4 @@ public class MyList<E> extends ArrayList<E> {
 			
 		return lst;
 	}
-   	
 }
