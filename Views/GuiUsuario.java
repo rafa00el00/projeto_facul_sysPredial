@@ -8,7 +8,7 @@ import java.util.Vector;
 import languages.*;
 import Models.*;
 import Funcoes.*;
-
+import Controllers.*;
 
 public class GuiUsuario extends GuiConsultar implements ActionListener{
    
@@ -28,13 +28,14 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
       btnNovo.addActionListener(this);
       btnAlterar.addActionListener(this);
       btnDeletar.addActionListener(this);
+      btnPesquisar.addActionListener(this);
       pnlButtons.add(btnEnviarConfg);
       super.repaint();
    }
    
    public void atualizarTabela(MyList list){
       MyList<Usuario> listU = list;
-       Vector<Vector> dados = new Vector<Vector>();
+      Vector<Vector> dados = new Vector<Vector>();
       for(Usuario fn : listU){
          Vector v = new Vector();
          v.add(fn.getCPF());
@@ -46,7 +47,7 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          dados.add(v);
       }
       CarregaTabela(dados,colunas);
-
+   
    }
    
    public void actionPerformed(ActionEvent e){
@@ -78,5 +79,11 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          */
       
       }
+      else if (e.getSource() == btnPesquisar){
+       UsuarioController.consultar(txtPesquisar.getText(),this);
+
+      }
+      
+      
    }
 }

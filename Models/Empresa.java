@@ -6,9 +6,11 @@ public class Empresa extends IEntidade{
 
    private String cnpj;
    private String razaoSocial;
-   private Date horarioFuncionamento;
+   private Date horarioAbertura;
+   private Date horarioFechamento;
    private int temperaturaPadrao;
-   private Date horarioArCondicionado;
+   private Date horaIniAr;
+   private Date horaFimAr;
    private Conjunto cj;
    
    public Empresa(){

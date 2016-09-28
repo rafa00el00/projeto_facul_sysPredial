@@ -4,9 +4,9 @@ import java.util.*;
 
 public class RegistroAcesso extends IEntidade{
    
-   private Date dataEntrada;
-   private Date horaEntrada;
-   private Date horaSaida;
+   private Date dataAcesso;
+   private String tipo;
+
    
    //Settes
    public void setDataEntrada(Date dataEntrada)
