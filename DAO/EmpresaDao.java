@@ -74,7 +74,7 @@ public class EmpresaDao extends AbstractDao{
    public void alterar(Empresa empresa)
    {
    
-      String sqlInsert = "Update Empresa "
+      String sqlInsert = "Update Empresa set "
     		  +"CNPJ = ?"
     	      +",RAZAOSOCIAL = ?"
     	      +",TemperaturaAr = ?"

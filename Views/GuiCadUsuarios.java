@@ -6,6 +6,7 @@ import languages.*;
 import Models.*;
 import Controllers.*;
 
+
 public class GuiCadUsuarios extends JDialog implements ActionListener{
    private JLabel lblCPF,lblNome,lblEmpresa,lblHoraEntra,lblHoraSaida, lblPrivilegio,lblLogin,lblPwd;
    private JTextField txtCPF,txtNome,txtEmpresa,txtHorarioEntrada,txtHorarioSaida,txtLogin;
@@ -24,7 +25,7 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
       txtCPF.setText(usr.getCPF());
       txtNome.setText(usr.getNome());
       txtHorarioEntrada.setText(usr.getHoraAcesso());
-      txtHorarioSaida.setText(usr.getHoraAcesso());
+      txtHorarioSaida.setText(usr.getHoraSaida());
       //privilegio
       /*
       if (usr.getPerfil() == "AD"){
@@ -117,14 +118,21 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
          usr.setSenha(txtPwd.getText());
          usr.setCPF(txtCPF.getText());
          usr.setNome(txtNome.getText());
+         usr.setEmpresa(new Empresa());
+         usr.getEmpresa().setId(Integer.parseInt(txtEmpresa.getText()));
          usr.setHoraAcesso(txtHorarioEntrada.getText());
-         usr.setHoraAcesso(txtHorarioSaida.getText());
+         usr.setHoraSaida(txtHorarioSaida.getText());
          usr.setPerfil(privilegio[cmbPrivilegio.getSelectedIndex()]);
-         
-         if(usr.getId()==0){
+         System.out.println(usr.getPerfil());
+         if(usr.getId()!=0){
             //alterar
+             UsuarioController.alterar(usr);
+            JOptionPane.showMessageDialog(null,"Alterado!");
+
          }else{
             //cadastrar
+            UsuarioController.incluir(usr);
+            JOptionPane.showMessageDialog(null,"Cadastrado!");
          }
          
       }

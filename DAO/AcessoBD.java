@@ -27,7 +27,7 @@ public abstract class AcessoBD
    {
       return DriverManager.getConnection
          (
-         "jdbc:mysql://LocalHost/atv14?user=alunos&password=alunos"
+         "jdbc:mysql://LocalHost/sysPredial?user=alunos&password=alunos"
          );
    }
 }

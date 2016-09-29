@@ -11,8 +11,8 @@ public abstract class EmpresaController{
    private static MyList<Empresa> empresas;
    
    public static void init(){
-      //empresas = (new EmpresaDao()).consultarTodos(new Empresa());
-      empresas = new MyList<Empresa>();
+      empresas = (new EmpresaDao()).consultarTodos(new Empresa());
+      //empresas = new MyList<Empresa>();
    }
    
    public static void consultar(){
@@ -29,7 +29,7 @@ public abstract class EmpresaController{
          empresas.add(ep);
       }*/
    
-      GuiEmpresa gui = new GuiEmpresa(usuarios);
+      GuiEmpresa gui = new GuiEmpresa(empresas);
       gui.setVisible(true);
    }
    

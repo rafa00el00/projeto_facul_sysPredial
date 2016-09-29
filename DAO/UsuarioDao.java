@@ -21,20 +21,22 @@ public class UsuarioDao extends AbstractDao{
       String sqlInsert = "INSERT INTO Usuario("
          +"login"
          +",CPF"
+         +",nome"
          +",empresa_id"
          +",horaAcesso"
          +",horaSaida"
          +")"
-         +" VALUES (?, ?, ?, ?, ?)";
+         +" VALUES (?, ?, ?, ?, ?, ?)";
       PreparedStatement stm = null;
       try
       {
          stm = conn.prepareStatement(sqlInsert);
          stm.setString(1, usr.getLogin());
          stm.setString(2, usr.getCPF());
-         stm.setInt(3, usr.getEmpresa().getId());
-         stm.setString(4, usr.getHoraAcesso());
-         stm.setString(5, usr.getHoraSaida());
+         stm.setString(3, usr.getNome());
+         stm.setInt(4, usr.getEmpresa().getId());
+         stm.setString(5, usr.getHoraAcesso());
+         stm.setString(6, usr.getHoraSaida());
          stm.execute();
       }
       catch (Exception e)
@@ -69,13 +71,14 @@ public class UsuarioDao extends AbstractDao{
    public void alterar(Usuario usr)
    {
    
-      String sqlInsert = "Update Usuario("
+      String sqlInsert = "Update Usuario set "
          +"login = ?"
          +",CPF = ?"
          +",empresa_id = ?"
          +",horaAcesso = ?"
          +",horaSaida = ?"
-         +")"
+         +",nome = ?"
+         +""
          +" where id = ?";
          
       PreparedStatement stm = null;
@@ -87,7 +90,8 @@ public class UsuarioDao extends AbstractDao{
          stm.setInt(3, usr.getEmpresa().getId());
          stm.setString(4, usr.getHoraAcesso());
          stm.setString(5, usr.getHoraSaida());
-         stm.setInt(6, usr.getId());
+         stm.setString(6, usr.getNome());
+         stm.setInt(7, usr.getId());
          stm.execute();
       }
       catch (Exception e)

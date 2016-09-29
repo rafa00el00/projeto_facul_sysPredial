@@ -1,6 +1,7 @@
 package Models;
 import Interfaces.*;
 import java.util.*;
+import DAO.*;
 
 public class Empresa extends IEntidade{
 
@@ -13,12 +14,15 @@ public class Empresa extends IEntidade{
    private Date horaFimAr;
    private Conjunto cj;
    
+   private EmpresaDao dao;
+   
    public Empresa(){
       this("","");
    }
    public Empresa(String cnpj,String razaoSocial){
       this.cnpj = cnpj;
       this.razaoSocial = razaoSocial;
+      dao = new EmpresaDao();
    }
    
    //getters e Settes
@@ -72,7 +76,9 @@ public class Empresa extends IEntidade{
 	}
 	
    
-   public void inserir(){ }
+   public void inserir(){
+      dao.incluir(this);
+    }
    public void alterar(){ }
    public void consultar(){ }
    public void deletar(){ }

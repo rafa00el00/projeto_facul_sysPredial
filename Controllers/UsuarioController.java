@@ -11,13 +11,13 @@ public abstract class UsuarioController{
    private static MyList<Usuario> usuarios;
    
    public static void init(){
-      //usuarios = (new UsuarioDao()).consultarTodos(new Usuario());
-     usuarios = new MyList<Usuario>();
+      usuarios = (new UsuarioDao()).consultarTodos(new Usuario());
+     //usuarios = new MyList<Usuario>();
    }
    
    public static void consultar(){
             
-      for (int i =0;i <=5;i++){
+      /*for (int i =0;i <=5;i++){
          Usuario fn = new Usuario();
          fn.setCPF("CPF"+i);
          fn.setNome("N"+i);
@@ -25,7 +25,7 @@ public abstract class UsuarioController{
          fn.setHoraAcesso("H"+i);
          fn.setHoraSaida("S"+i);      
          usuarios.add(fn);
-      }
+      }*/
 
       GuiUsuario usr = new GuiUsuario(usuarios);
       usr.setVisible(true);

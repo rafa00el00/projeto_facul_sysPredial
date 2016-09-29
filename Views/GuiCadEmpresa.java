@@ -16,7 +16,7 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
       txtCNPJ.setText(emp.getCnpj());
       txtRazaoSocial.setText(emp.getRazaoSocial());
       txtConjunto.setText(emp.getCnpj());
-      txthorafuncionamento.setText(emp.getHorarioFuncionamento().toString());
+      txthorafuncionamento.setText(emp.getHorarioAbertura().toString());
       txtArcondicionado.setText(emp.getTemperaturaPadrao()+ "");
 
       

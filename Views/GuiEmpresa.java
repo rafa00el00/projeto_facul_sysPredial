@@ -8,21 +8,22 @@ import java.util.Vector;
 import java.util.Date;
 import languages.*;
 import Models.*;
+import Funcoes.*;
 
 
 public class GuiEmpresa extends GuiConsultar implements ActionListener{
    
-   private ArrayList<Empresa> empresas;
+   private MyList<Empresa> empresas;
    private Object[] colunas = {"CNPJ","Razão Social","horário de funcionamento","ar-condicionado","OBJ"};
 
    public GuiEmpresa(){
       super(Idiomas.getString("GuiEmpresa.title"));
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
-      empresas = new ArrayList<Empresa>();
+      empresas = new MyList<Empresa>();
       
       
-   atualizarTabela(empresas);
+      atualizarTabela(empresas);
             
       
       btnNovo.addActionListener(this);
@@ -31,22 +32,23 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener{
       super.repaint();
    }
    
-   public void atualizarTabela(ArrayList list){
-      ArrayList<Usuario> listU = list;
-       Vector<Vector> dados = new Vector<Vector>();
+   
+   public void atualizarTabela(MyList list){
+      MyList<Usuario> listU = list;
+      Vector<Vector> dados = new Vector<Vector>();
       for(Empresa ep : empresas){
          Vector v = new Vector();
          v.add(ep.getCnpj());
          v.add(ep.getRazaoSocial());
-         v.add(String.format("%tD\n",ep.getHorarioFuncionamento()));
-         v.add(ep.getTemperaturaPadrao() + " - " + String.format("%tT\n",ep.getHorarioArCondicionado()));
+         v.add(String.format("%tD\n",ep.getHorarioAbertura()));
+         v.add(ep.getTemperaturaPadrao() + " - " + String.format("%tT\n",ep.getHoraIniAr()));
          v.add(ep);
          dados.add(v);
       }
       
                            
       CarregaTabela(dados,colunas);
-
+   
    }
 
    
