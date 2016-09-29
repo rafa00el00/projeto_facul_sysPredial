@@ -1,20 +1,34 @@
 package Views;
 import javax.swing.*;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.*;
 import languages.*;
 import Models.*;
+import Funcoes.*;
 import Controllers.*;
 
 
 public class GuiCadUsuarios extends JDialog implements ActionListener{
    private JLabel lblCPF,lblNome,lblEmpresa,lblHoraEntra,lblHoraSaida, lblPrivilegio,lblLogin,lblPwd;
-   private JTextField txtCPF,txtNome,txtEmpresa,txtHorarioEntrada,txtHorarioSaida,txtLogin;
+   private JTextField txtCPF,txtNome,txtLogin;
    private JPasswordField txtPwd;
    private JComboBox cmbPrivilegio;
    private JButton btnOk,btnCancel;
    private String[] privilegio;
    private Usuario usr;
+   private JComboBox cmbEmpresa;
+   private JFormattedTextField txtHorarioEntrada,txtHorarioSaida;
+   private MyList<Empresa> lstEmpresas;
+   
+   public void setLstEmpresas(MyList<Empresa> lstEmpresas){
+      this.lstEmpresas = lstEmpresas;
+   }
+   
+   public MyList<Empresa> getLstEmpresas(){
+      return this.lstEmpresas;
+   }
+   
    
    public GuiCadUsuarios(JFrame fr,boolean op,Usuario usr){
       this(fr,op);
@@ -57,14 +71,28 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
       
       txtCPF = new JTextField();
       txtNome = new JTextField();
-      txtEmpresa = new JTextField();
-      txtHorarioEntrada = new JTextField();
-      txtHorarioSaida = new JTextField();
+      //txtEmpresa = new JTextField();
+      cmbEmpresa = new JComboBox();
+   
+      txtHorarioEntrada = new JFormattedTextField();
+      txtHorarioSaida = new JFormattedTextField();
       txtLogin = new JTextField();
       txtPwd = new JPasswordField();
       
-      
-      cmbPrivilegio = new JComboBox();
+      MaskFormatter maskHora = null;
+      try {
+         maskHora = new MaskFormatter("##:##");
+      } 
+      catch (Exception e) {
+      	// TODO Auto-generated catch block
+         e.printStackTrace();
+         return;
+      }
+      maskHora.install(txtHorarioEntrada);
+      maskHora.install(txtHorarioSaida);
+                  
+      lstEmpresas = new MyList<Empresa>();
+      cmbPrivilegio = new JComboBox(lstEmpresas.toArray());
       privilegio = new String[3];
       privilegio[0] = ("AD");
       privilegio[1] = ("AT");
@@ -94,7 +122,7 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
       add(lblNome);
       add(txtNome);
       add(lblEmpresa);
-      add(txtEmpresa);
+      add(cmbEmpresa);
       add(lblHoraEntra);
       add(txtHorarioEntrada);
       add(lblHoraSaida);
@@ -119,17 +147,18 @@ public class GuiCadUsuarios extends JDialog implements ActionListener{
          usr.setCPF(txtCPF.getText());
          usr.setNome(txtNome.getText());
          usr.setEmpresa(new Empresa());
-         usr.getEmpresa().setId(Integer.parseInt(txtEmpresa.getText()));
+         usr.getEmpresa().setId(((Empresa)cmbEmpresa.getSelectedItem()).getId());
          usr.setHoraAcesso(txtHorarioEntrada.getText());
          usr.setHoraSaida(txtHorarioSaida.getText());
          usr.setPerfil(privilegio[cmbPrivilegio.getSelectedIndex()]);
          System.out.println(usr.getPerfil());
          if(usr.getId()!=0){
             //alterar
-             UsuarioController.alterar(usr);
+            UsuarioController.alterar(usr);
             JOptionPane.showMessageDialog(null,"Alterado!");
-
-         }else{
+         
+         }
+         else{
             //cadastrar
             UsuarioController.incluir(usr);
             JOptionPane.showMessageDialog(null,"Cadastrado!");

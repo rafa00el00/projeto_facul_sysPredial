@@ -8,11 +8,13 @@ import java.util.Vector;
 import java.util.Date;
 import languages.*;
 import Models.*;
+import Funcoes.*;
 
 
 public class GuiConjunto extends GuiConsultar implements ActionListener{
    
-     private ArrayList<Conjunto> conjuntos;
+     private MyList<Conjunto> conjuntos;
+Object[] colunas = {"Conjunto","Andar","preco alugel","tamanho","ocupado","OBJ"};
 
    
    public GuiConjunto(){
@@ -20,8 +22,7 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
       //dados para teste
-      Object[] colunas = {"Conjunto","Andar","preco alugel","tamanho","ocupado","OBJ"};
-                                 
+                                       
 
       Vector<Vector> dados = new Vector<Vector>();
       for(Conjunto cj : conjuntos){
@@ -30,7 +31,7 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
          v.add(cj.getAndar());
          v.add(cj.getAlugel());
          v.add(cj.getTamanho());
-         v.add(cj.getOcupado());
+         v.add(cj.isOcupado());
          v.add(cj);
          dados.add(v);
       }
@@ -62,5 +63,23 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
       
       }
    }
+   
+    public void atualizarTabela(MyList list){
+      MyList<Usuario> listU = list;
+      Vector<Vector> dados = new Vector<Vector>();
+      for(Usuario fn : listU){
+         Vector v = new Vector();
+         v.add(fn.getCPF());
+         v.add(fn.getNome());
+         v.add(fn.getEmpresa().getRazaoSocial());
+         v.add(fn.getHoraAcesso());
+         v.add(fn.getHoraSaida());
+         v.add(fn);
+         dados.add(v);
+      }
+      CarregaTabela(dados,colunas);
+   
+   }
+
 
 }

@@ -4,6 +4,7 @@ import Models.*;
 import Funcoes.*;
 import DAO.*;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import Views.*;
 
 public abstract class UsuarioController{
@@ -26,7 +27,7 @@ public abstract class UsuarioController{
          fn.setHoraSaida("S"+i);      
          usuarios.add(fn);
       }*/
-
+   
       GuiUsuario usr = new GuiUsuario(usuarios);
       usr.setVisible(true);
    }
@@ -34,6 +35,14 @@ public abstract class UsuarioController{
    public static void consultar(String pesquisa,GuiConsultar gui){
       gui.atualizarTabela(usuarios.find(e->e.getNome().contains(pesquisa)));
    }
+   
+   public static boolean incluir(JFrame fm){
+      GuiCadUsuarios cad = new GuiCadUsuarios(fm,false);
+      cad.setLstEmpresas((new EmpresaDao()).consultarTodos(new Usuario()));
+      cad.setVisible(true);
+      return true;
+   }
+   
    
    public static boolean incluir(Usuario usr){
       Login lg = new Login();

@@ -33,6 +33,7 @@ public class GuiLogin extends JDialog implements ActionListener{
       
       btnCancel.addActionListener(this);
       btnOk.addActionListener(this);
+   
       
       add(lblLogin);
       add(txtLogin);
@@ -46,9 +47,11 @@ public class GuiLogin extends JDialog implements ActionListener{
    }
    
    public void actionPerformed(ActionEvent e){
-      
       if (e.getSource() == btnCancel){
-         System.exit(0);
+         txtLogin.setText("Rafa");
+         txtSenha.setText("123");
+         
+       //  System.exit(0);
       }
       else if(e.getSource() == btnOk){
          //System.out.println(txtLogin.getText()+ ":" + txtSenha.getText());

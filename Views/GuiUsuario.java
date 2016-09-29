@@ -52,8 +52,9 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
    
    public void actionPerformed(ActionEvent e){
       if (e.getSource() == btnNovo){
-         GuiCadUsuarios cad = new GuiCadUsuarios(this,false);
-         cad.setVisible(true);
+        /* GuiCadUsuarios cad = new GuiCadUsuarios(this,false);
+         cad.setVisible(true);*/
+         UsuarioController.incluir(this);
       }
       else if (e.getSource() == btnAlterar){
          if (tblConsulta.getSelectedRow() < 0){

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import languages.*;
 import Models.*;
+import Controllers.*;
 
 public class GuiCadEmpresa extends JDialog implements ActionListener{
      
@@ -43,6 +44,7 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
       txthorafuncionamento = new JTextField();
       txtArcondicionado = new JTextField();
       
+     
            
       if (op){
          btnOk = new JButton(Idiomas.getString("GuiCadEmpresa.btnOk2"));
@@ -62,6 +64,8 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
       add(txtRazaoSocial);
       add(lblConjunto);
       add(txtConjunto);
+      add(lblhorafuncionamento);
+      add(txthorafuncionamento);
       add(lblhorafuncionamento);
       add(txthorafuncionamento);
       add(lblArcondicionado);
