@@ -96,6 +96,7 @@ public class EmpresaDao extends AbstractDao {
 
 		PreparedStatement stm = null;
 		ResultSet rs = null;
+      UsuarioDao usrDao = new UsuarioDao();
 		
 		try {
 			stm = conn.prepareStatement(sqlSelect);
@@ -113,7 +114,7 @@ public class EmpresaDao extends AbstractDao {
 				empresa.setHorarioFechamento(rs.getTime("horaFechamento"));
 				empresa.setHoraIniAr(rs.getTime("horaIniAr"));
 				empresa.setHoraFimAr(rs.getTime("horaFimAr"));
-				empresa.setFuncionarios((new UsuarioDao()).consultarTodos(empresa));
+				//empresa.setFuncionarios(usrDao.consultarTodos(empresa));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,6 +147,7 @@ public class EmpresaDao extends AbstractDao {
 		PreparedStatement stm = null;
 		ResultSet rs = null;
 		Empresa empresa = new Empresa();
+      UsuarioDao usrDao = new UsuarioDao();
 		try {
 			stm = conn.prepareStatement(sqlSelect);
 			/*
@@ -163,7 +165,7 @@ public class EmpresaDao extends AbstractDao {
 				empresa.setHorarioFechamento(rs.getTime("horaFechamento"));
 				empresa.setHoraIniAr(rs.getTime("horaIniAr"));
 				empresa.setHoraFimAr(rs.getTime("horaFimAr"));
-				empresa.setFuncionarios((new UsuarioDao()).consultarTodos(empresa));
+				//empresa.setFuncionarios(usrDao.consultarTodos(empresa));
 				empresas.add(empresa);
 
 			}

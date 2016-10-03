@@ -9,9 +9,10 @@ public abstract class AbstractDao{
    protected Connection conn;
    
    public AbstractDao(){
-   try{
-      conn = AcessoBD.getInstance();
-      }catch(Exception e){
+      try{
+         conn = AcessoBD.getInstance();
+      }
+      catch(Exception e){
          e.printStackTrace();
       }
    }

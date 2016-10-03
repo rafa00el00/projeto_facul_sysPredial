@@ -130,14 +130,14 @@ public class UsuarioDao extends AbstractDao{
       if (entidade instanceof Usuario){
          sqlSelect += " where id = ?";
       }
-       usr= new Usuario();
-
+      usr= new Usuario();
+   
       PreparedStatement stm = null;
       ResultSet rs = null;
       Empresa empresa = new Empresa();
       Login lg = new Login();
       lg.carregarLogins();
-      
+      EmpresaDao empDao = new EmpresaDao();
       try
       {
          stm = conn.prepareStatement(sqlSelect);
@@ -145,7 +145,7 @@ public class UsuarioDao extends AbstractDao{
             stm.setInt(1,entidade.getId());
          }
          rs = stm.executeQuery();
-                 while (rs.next())
+         while (rs.next())
          {
             
             usr.setId(rs.getInt("id"));
@@ -154,7 +154,7 @@ public class UsuarioDao extends AbstractDao{
             usr.setNome(rs.getString("nome"));
             usr.setEmpresa(new Empresa());
             usr.getEmpresa().setId(rs.getInt("empresa_id"));
-            usr.getEmpresa().consultar();
+            empDao.consultar(usr.getEmpresa());
             usr.setHoraAcesso(rs.getTime("horaAcesso"));
             usr.setHoraSaida(rs.getTime("horaSaida"));
             lg.getLogin(usr);    
@@ -200,18 +200,22 @@ public class UsuarioDao extends AbstractDao{
          sqlSelect += " where empresa_id = ?";
       }
        
-
+   
       PreparedStatement stm = null;
       ResultSet rs = null;
       Empresa empresa = new Empresa();
       Login lg = new Login();
       lg.carregarLogins();
+      EmpresaDao empDao = new EmpresaDao();
+      
+   
       try
       {
          stm = conn.prepareStatement(sqlSelect);
          if (entidade instanceof Usuario){
             //traz todos
-         }else if (entidade instanceof Empresa){
+         }
+         else if (entidade instanceof Empresa){
             stm.setInt(1,((Empresa)entidade).getId());
          }
          rs = stm.executeQuery();
@@ -224,11 +228,11 @@ public class UsuarioDao extends AbstractDao{
             usr.setNome(rs.getString("nome"));
             usr.setEmpresa(new Empresa());
             usr.getEmpresa().setId(rs.getInt("empresa_id"));
-            usr.getEmpresa().consultar();
+            empDao.consultar(usr.getEmpresa());
             usr.setHoraAcesso(rs.getTime("horaAcesso"));
             usr.setHoraSaida(rs.getTime("horaSaida"));
             lg.getLogin(usr);
-             usuarios.add(usr);     
+            usuarios.add(usr);     
             
          }
       }
@@ -261,46 +265,47 @@ public class UsuarioDao extends AbstractDao{
       return usuarios;
    }
 
-public boolean deletar(Usuario usr) {
-	 String sqlInsert = "Delete from Usuario "
-	         +" where id = ?";
-	         
-	      PreparedStatement stm = null;
-	      try
-	      {
-	         stm.setInt(1, usr.getId());
-	         stm.execute();
-	         return true;
-	      }
-	      catch (Exception e)
-	      {
-	         e.printStackTrace();
-	         try
-	         {
-	            conn.rollback();
-	         }
-	         catch (SQLException e1)
-	         {
-	            System.out.print(e1.getStackTrace());
-	         }
-	         finally
-	         {
-	            if (stm != null)
-	            {
-	               try
-	               {
-	                  stm.close();
-	               }
-	               catch (SQLException e1)
-	               {
-	                  System.out.print(e1.getStackTrace());
-	               }
-	            }
-	         }
-	         return false;
-	      }
-	
-}
+   public boolean deletar(Usuario usr) {
+      String sqlInsert = "Delete from Usuario "
+            +" where id = ?";
+            
+      PreparedStatement stm = null;
+      try
+      {
+      stm = conn.prepareStatement(sqlInsert);
+         stm.setInt(1, usr.getId());
+         stm.execute();
+         return true;
+      }
+      catch (Exception e)
+      {
+         e.printStackTrace();
+         try
+         {
+            conn.rollback();
+         }
+         catch (SQLException e1)
+         {
+            System.out.print(e1.getStackTrace());
+         }
+         finally
+         {
+            if (stm != null)
+            {
+               try
+               {
+                  stm.close();
+               }
+               catch (SQLException e1)
+               {
+                  System.out.print(e1.getStackTrace());
+               }
+            }
+         }
+         return false;
+      }
+   
+   }
 
 
 

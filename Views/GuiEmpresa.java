@@ -85,6 +85,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener {
 	         if (resp == JOptionPane.YES_OPTION){
 	        	 EmpresaController.deletar(emp);
 	         }
+            JOptionPane.showMessageDialog(null, "Deletado!");        
 
 		} else if(e.getSource() == btnPesquisar){
 			EmpresaController.consultar(txtPesquisar.getText(), this);

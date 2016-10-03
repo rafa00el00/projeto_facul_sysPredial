@@ -7,6 +7,7 @@ import java.sql.SQLException;
 */
 public abstract class AcessoBD
 {
+   private static Connection conn;
 // -----------------------------------------------------------
 // Carrega driver JDBC
 //
@@ -25,10 +26,13 @@ public abstract class AcessoBD
 // Obtém conexão com o banco de dados
    public static Connection getInstance() throws SQLException
    {
-      return DriverManager.getConnection
-         (
-         //"jdbc:mysql://LocalHost:3306/sysPredial?user=alunos&password=alunos"
-         "jdbc:mysql://LocalHost:3306/sysPredial?user=root&password="
-         );
+      if (conn == null){
+         conn= DriverManager.getConnection
+            (
+            "jdbc:mysql://LocalHost:3306/sysPredial?user=alunos&password=alunos"
+            //"jdbc:mysql://LocalHost:3306/sysPredial?user=root&password="
+            );
+      }
+      return conn;
    }
 }

@@ -118,9 +118,6 @@ public class Empresa extends IEntidade {
 
 	public void deletar() {
 		dao.deletar(this);
-		for (Usuario fn : funcionarios) {
-			fn.deletar();
-		}
 	}
 
 	@Override

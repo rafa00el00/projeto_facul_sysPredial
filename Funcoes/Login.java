@@ -10,8 +10,8 @@ public class Login {
 
 	private String txtArquivo;
 	private MyList<Usuario> usuarios;
-	private final String ArquivoLogin = "C:/Users/rafael/Desktop/sistemaPredial/projeto_facul_sysPredial/users.txt";
-	private final String Chave = "C:/Users/rafael/Desktop/sistemaPredial/projeto_facul_sysPredial/chave.simetrica";
+	private final String ArquivoLogin = "users.txt";
+	private final String Chave = "chave.simetrica";
 
 	public Login() {
 		usuarios = new MyList<Usuario>();
