@@ -15,7 +15,5 @@ public abstract class AbstractDao{
          e.printStackTrace();
       }
    }
-   
-   
-   
+  
 }

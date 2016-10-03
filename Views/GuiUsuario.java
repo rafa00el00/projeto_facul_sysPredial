@@ -33,7 +33,8 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
       super.repaint();
    }
    
-   public void atualizarTabela(MyList list){
+   
+public void atualizarTabela(MyList list){
       MyList<Usuario> listU = list;
       Vector<Vector> dados = new Vector<Vector>();
       for(Usuario fn : listU){
@@ -63,8 +64,7 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          }
          //Retorna o objeto de usuario da tabela
          Usuario usr = (Usuario)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
-         GuiCadUsuarios cad = new GuiCadUsuarios(this,true,usr);
-         cad.setVisible(true);
+         UsuarioController.alterar(this, usr);
       }
       else if(e.getSource() == btnDeletar){
          if (tblConsulta.getSelectedRow() < 0){
@@ -73,12 +73,13 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
          }
          //Retorna o objeto de usuario da tabela
          Usuario usr = (Usuario)tblConsulta.getValueAt(tblConsulta.getSelectedRow(), tblConsulta.getColumnCount() -1);
-         //int resp = JOptionPane.showCofirmDialog("Deseja realmente deletar o Usuario " + usr.getNome() + "?");
+         int resp = JOptionPane.showConfirmDialog(null,"Deseja realmente deletar o Usuario " + usr.getNome() + "?"
+        		 ,"Confirmar exclução!",JOptionPane.YES_NO_OPTION);
          
-         /*
-         *implementar o deletar
-         */
-      
+         if (resp == JOptionPane.YES_OPTION){
+        	 UsuarioController.deletar(usr);
+         }
+              
       }
       else if (e.getSource() == btnPesquisar){
        UsuarioController.consultar(txtPesquisar.getText(),this);

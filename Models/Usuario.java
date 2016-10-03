@@ -1,7 +1,9 @@
 package Models;
+import java.sql.Time;
 import java.util.ArrayList;
 import Interfaces.*;
 import DAO.*;
+import Funcoes.Login;
 public class Usuario extends IEntidade{
 
    private String login;
@@ -10,8 +12,8 @@ public class Usuario extends IEntidade{
    private String CPF;
    private String nome;
    private Empresa empresa;
-   private String horaAcesso;
-   private String horaSaida; 
+   private Time horaAcesso;
+   private Time horaSaida; 
    private UsuarioDao dao;
    
    public Usuario(String login,String senha,String perfil){
@@ -71,38 +73,39 @@ public class Usuario extends IEntidade{
    public void setEmpresa(Empresa empresa) {
       this.empresa = empresa;
    }
-   public String getHoraAcesso() {
+   public Time getHoraAcesso() {
       return horaAcesso;
    }
-   public void setHoraAcesso(String horaAcesso) {
+   public void setHoraAcesso(Time horaAcesso) {
       this.horaAcesso = horaAcesso;
    }
-   public String getHoraSaida() {
+   public Time getHoraSaida() {
       return horaSaida;
    }
-   public void setHoraSaida(String horaSaida) {
+   public void setHoraSaida(Time horaSaida) {
       this.horaSaida = horaSaida;
    }
 
    
    
    //Metodos
-   public boolean fazerlogin(){
-      return false;
-   }
-   
    public void incluir(){
       dao.incluir(this);          
    }
    
     public void alterar(){
-      dao.alterar(this);          
+      dao.alterar(this); 
    }
    
    public void consultar(){
       dao.consultar(this);          
    }
-
-   public void deletar(){ }
+   
+   public void deletar(){ 
+	   dao.deletar(this);
+	   Login lg = new Login();
+	   lg.removeLogin(this);
+	   lg.salvarAlteracoes();
+   }
    
 }

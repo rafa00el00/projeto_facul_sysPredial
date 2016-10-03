@@ -35,8 +35,8 @@ public class UsuarioDao extends AbstractDao{
          stm.setString(2, usr.getCPF());
          stm.setString(3, usr.getNome());
          stm.setInt(4, usr.getEmpresa().getId());
-         stm.setString(5, usr.getHoraAcesso());
-         stm.setString(6, usr.getHoraSaida());
+         stm.setTime(5, usr.getHoraAcesso());
+         stm.setTime(6, usr.getHoraSaida());
          stm.execute();
       }
       catch (Exception e)
@@ -88,8 +88,8 @@ public class UsuarioDao extends AbstractDao{
          stm.setString(1, usr.getLogin());
          stm.setString(2, usr.getCPF());
          stm.setInt(3, usr.getEmpresa().getId());
-         stm.setString(4, usr.getHoraAcesso());
-         stm.setString(5, usr.getHoraSaida());
+         stm.setTime(4, usr.getHoraAcesso());
+         stm.setTime(5, usr.getHoraSaida());
          stm.setString(6, usr.getNome());
          stm.setInt(7, usr.getId());
          stm.execute();
@@ -135,6 +135,9 @@ public class UsuarioDao extends AbstractDao{
       PreparedStatement stm = null;
       ResultSet rs = null;
       Empresa empresa = new Empresa();
+      Login lg = new Login();
+      lg.carregarLogins();
+      
       try
       {
          stm = conn.prepareStatement(sqlSelect);
@@ -151,9 +154,10 @@ public class UsuarioDao extends AbstractDao{
             usr.setNome(rs.getString("nome"));
             usr.setEmpresa(new Empresa());
             usr.getEmpresa().setId(rs.getInt("empresa_id"));
-            usr.setHoraAcesso(rs.getString("horaAcesso"));
-            usr.setHoraSaida(rs.getString("horaSaida"));
-                  
+            usr.getEmpresa().consultar();
+            usr.setHoraAcesso(rs.getTime("horaAcesso"));
+            usr.setHoraSaida(rs.getTime("horaSaida"));
+            lg.getLogin(usr);    
             
          }
       }
@@ -200,6 +204,8 @@ public class UsuarioDao extends AbstractDao{
       PreparedStatement stm = null;
       ResultSet rs = null;
       Empresa empresa = new Empresa();
+      Login lg = new Login();
+      lg.carregarLogins();
       try
       {
          stm = conn.prepareStatement(sqlSelect);
@@ -218,8 +224,10 @@ public class UsuarioDao extends AbstractDao{
             usr.setNome(rs.getString("nome"));
             usr.setEmpresa(new Empresa());
             usr.getEmpresa().setId(rs.getInt("empresa_id"));
-            usr.setHoraAcesso(rs.getString("horaAcesso"));
-            usr.setHoraSaida(rs.getString("horaSaida"));
+            usr.getEmpresa().consultar();
+            usr.setHoraAcesso(rs.getTime("horaAcesso"));
+            usr.setHoraSaida(rs.getTime("horaSaida"));
+            lg.getLogin(usr);
              usuarios.add(usr);     
             
          }
@@ -252,6 +260,47 @@ public class UsuarioDao extends AbstractDao{
       }
       return usuarios;
    }
+
+public boolean deletar(Usuario usr) {
+	 String sqlInsert = "Delete from Usuario "
+	         +" where id = ?";
+	         
+	      PreparedStatement stm = null;
+	      try
+	      {
+	         stm.setInt(1, usr.getId());
+	         stm.execute();
+	         return true;
+	      }
+	      catch (Exception e)
+	      {
+	         e.printStackTrace();
+	         try
+	         {
+	            conn.rollback();
+	         }
+	         catch (SQLException e1)
+	         {
+	            System.out.print(e1.getStackTrace());
+	         }
+	         finally
+	         {
+	            if (stm != null)
+	            {
+	               try
+	               {
+	                  stm.close();
+	               }
+	               catch (SQLException e1)
+	               {
+	                  System.out.print(e1.getStackTrace());
+	               }
+	            }
+	         }
+	         return false;
+	      }
+	
+}
 
 
 

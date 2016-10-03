@@ -16,19 +16,7 @@ public abstract class EmpresaController{
    }
    
    public static void consultar(){
-            
-      //dados para teste
-                                       
-      /*for (int i =0;i <=5;i++){
-         Empresa ep = new Empresa();
-         ep.setCnpj("CNPJ"+i);
-         ep.setRazaoSocial("N"+i);
-         ep.setHorarioFuncionamento(new Date());
-         ep.setTemperaturaPadrao(i);
-         ep.setHorarioArCondicionado(new Date());
-         empresas.add(ep);
-      }*/
-   
+
       GuiEmpresa gui = new GuiEmpresa(empresas);
       gui.setVisible(true);
    }
@@ -40,6 +28,7 @@ public abstract class EmpresaController{
    public static boolean incluir(Empresa empresa){
       try{
          empresa.incluir();
+         empresas.add(empresa);
       }
       catch(Exception e){
          e.printStackTrace();
@@ -60,6 +49,7 @@ public abstract class EmpresaController{
    public static void deletar(Empresa empresa){
       try{
          empresa.deletar();
+         empresas.remove(empresa);
       }
       catch(Exception e){
          e.printStackTrace();

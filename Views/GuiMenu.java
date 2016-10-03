@@ -92,8 +92,7 @@ public class GuiMenu extends JFrame implements ActionListener{
       
       add(lblFundo);
       
-      //Controllers
-      UsuarioController.init();
+      
    }
    
    public void actionPerformed( ActionEvent e ) {
@@ -105,8 +104,7 @@ public class GuiMenu extends JFrame implements ActionListener{
          UsuarioController.consultar();
       }
       else if (e.getSource() == mnuItConsultarEmpresa){
-         GuiEmpresa usr = new GuiEmpresa();
-         usr.setVisible(true);
+         EmpresaController.consultar();
       }
       else if (e.getSource() == mnuItConsultarConjunto){
          GuiConjunto usr = new GuiConjunto();

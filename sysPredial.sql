@@ -8,8 +8,8 @@ create table Usuario(
 	,nome varchar(150)
 	,cpf varchar(11)
 	,empresa_id int
-	,horaAcesso datetime
-	,horaSaida datetime
+	,horaAcesso time
+	,horaSaida time
 	,Constraint pk_usuario primary key (id)
 );
 
@@ -19,10 +19,10 @@ create table empresa(
 	,cnpj varchar(14)
 	,razaosocial varchar(150)
 	,TemperaturaAr int
-	,horaAbertura datetime
-	,horaFechamento datetime
-	,horaIniAr datetime
-	,horaFimAr datetime
+	,horaAbertura time
+	,horaFechamento time
+	,horaIniAr time
+	,horaFimAr time
 	,Constraint pk_empresa primary key (id)
 );
 /*GRANT ALL PRIVILEGES ON sysPredial.* To 'alunos'@'localhost' IDENTIFIED BY 'alunos';*/
