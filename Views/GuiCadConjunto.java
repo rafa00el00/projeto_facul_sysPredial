@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import languages.*;
+import Models.*;
 
 public class GuiCadConjunto extends JDialog implements ActionListener{
      
@@ -10,6 +11,16 @@ public class GuiCadConjunto extends JDialog implements ActionListener{
    private JTextField txtConjunto, txtAndar, txtPreco, txtTamanho;
    private JComboBox cmbOcupado;
    private JButton btnOk,btnCancel;
+   private Conjunto conjunto;
+   public GuiCadConjunto(JFrame fr,boolean op,Conjunto conjunto){
+      this(fr,op);
+      this.conjunto = conjunto;
+      txtConjunto.setText(conjunto.getNrConjunto());
+      txtAndar.setText(conjunto.getAndar());
+      txtPreco.setText(conjunto.getAlugel() + "");
+      txtTamanho.setText(conjunto.getTamanho() + "");
+      //cmbOcupado.setSelectedIndex(conjunto.isOcupado());
+   }
 
    public GuiCadConjunto(JFrame fr,boolean op){
       super(fr,true);
@@ -32,8 +43,8 @@ public class GuiCadConjunto extends JDialog implements ActionListener{
       txtTamanho = new JTextField();
       
       cmbOcupado = new JComboBox();
-      cmbOcupado.addItem("Sim");
       cmbOcupado.addItem("Não");
+      cmbOcupado.addItem("Sim");
             
            
       if (op){
@@ -65,8 +76,19 @@ public class GuiCadConjunto extends JDialog implements ActionListener{
    
    public void actionPerformed(ActionEvent e){
       if (e.getSource() == btnCancel){
+         System.exit(0);
       }
       else if(e.getSource() == btnOk){
+         if (conjunto == null){
+            conjunto = new Conjunto();
+         }
+         
+         conjunto.setNrConjunto(txtConjunto.getText());
+         conjunto.setAndar(txtAndar.getText());
+         conjunto.setAlugel(Double.parseDouble(txtPreco.getText()));
+         conjunto.setTamanho(Integer.parseInt(txtConjunto.getText()));
+      
+      
       }
    
    }

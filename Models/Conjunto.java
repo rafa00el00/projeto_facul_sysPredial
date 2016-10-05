@@ -1,5 +1,6 @@
 package Models;
 import Interfaces.*;
+import DAO.*;
 import java.util.*;
 
 public class Conjunto extends IEntidade{
@@ -10,6 +11,12 @@ public class Conjunto extends IEntidade{
    private int tamanho;
    private boolean ocupado;
    private Empresa empresa;
+   
+   private ConjuntoDao dao;
+   
+   public Conjunto(){
+      dao = new ConjuntoDao();
+   }
    
    //Getters and Setters
    public String getNrConjunto() {
@@ -50,9 +57,9 @@ public class Conjunto extends IEntidade{
    }
 	   
 	   
-   public void inserir(){ }
-   public void alterar(){ }
-   public void consultar(){ }
-   public void deletar(){ }  	
+   public void inserir(){dao.incluir(this); }
+   public void alterar(){dao.alterar(this); }
+   public void consultar(){dao.consultar(this); }
+   public void deletar(){dao.deletar(this); }  	
 
 }
