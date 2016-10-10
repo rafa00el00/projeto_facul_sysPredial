@@ -32,6 +32,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener {
 		btnAlterar.addActionListener(this);
 		btnDeletar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
+		lblPesquisar.setText("Razão Social:");
 		super.repaint();
 	}
 
@@ -58,8 +59,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnNovo) {
-			GuiCadEmpresa cad = new GuiCadEmpresa(this, false);
-			cad.setVisible(true);
+			EmpresaController.incluir(this);
 		} else if (e.getSource() == btnAlterar) {
 			if (tblConsulta.getSelectedRow() < 0) {
 				JOptionPane.showMessageDialog(null, "Por favor selecione um registro!");
@@ -69,8 +69,7 @@ public class GuiEmpresa extends GuiConsultar implements ActionListener {
 			Empresa emp = (Empresa) tblConsulta.getValueAt(tblConsulta.getSelectedRow(),
 					tblConsulta.getColumnCount() - 1);
 
-			GuiCadEmpresa cad = new GuiCadEmpresa(this, true, emp);
-			cad.setVisible(true);
+			EmpresaController.alterar(this, emp);
 		} else if (e.getSource() == btnDeletar) {
 			if (tblConsulta.getSelectedRow() < 0) {
 				JOptionPane.showMessageDialog(null, "Por favor selecione um registro!");

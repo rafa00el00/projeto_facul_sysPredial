@@ -30,6 +30,7 @@ public class GuiUsuario extends GuiConsultar implements ActionListener{
       btnDeletar.addActionListener(this);
       btnPesquisar.addActionListener(this);
       pnlButtons.add(btnEnviarConfg);
+      lblPesquisar.setText("Nome:");
       super.repaint();
    }
    

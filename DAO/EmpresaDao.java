@@ -20,7 +20,7 @@ public class EmpresaDao extends AbstractDao {
 	public void incluir(Empresa empresa) {
 
 		String sqlInsert = "INSERT INTO Empresa(" + "CNPJ" + ",RAZAOSOCIAL" + ",TemperaturaAr" + ",horaAbertura"
-				+ ",horaFechamento" + ",horaIniAr" + ",horaFimAr" + ")" + " VALUES (?, ?, ?, ?, ?,?,?)";
+				+ ",horaFechamento" + ",horaIniAr" + ",horaFimAr" + ",conjunto_id)" + " VALUES (?, ?, ?, ?, ?,?,?,?)";
 		PreparedStatement stm = null;
 		try {
 			stm = conn.prepareStatement(sqlInsert);
@@ -31,7 +31,11 @@ public class EmpresaDao extends AbstractDao {
 			stm.setTime(5, empresa.getHorarioFechamento());
 			stm.setTime(6, empresa.getHoraIniAr());
 			stm.setTime(7, empresa.getHoraFimAr());
-			stm.execute();
+			stm.setInt(8, empresa.getConjunto().getId());
+			stm.executeUpdate();
+			ResultSet rs = stm.getGeneratedKeys();
+			rs.next();
+			empresa.setId(rs.getInt(1));
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
@@ -55,6 +59,7 @@ public class EmpresaDao extends AbstractDao {
 
 		String sqlInsert = "Update Empresa set " + "CNPJ = ?" + ",RAZAOSOCIAL = ?" + ",TemperaturaAr = ?"
 				+ ",horaAbertura = ?" + ",horaFechamento = ?" + ",horaIniAr = ?" + ",horaFimAr = ?" + ""
+						+ ",conjunto_id = ? "
 				+ " where id = ?";
 
 		PreparedStatement stm = null;
@@ -67,7 +72,8 @@ public class EmpresaDao extends AbstractDao {
 			stm.setTime(5, empresa.getHorarioFechamento());
 			stm.setTime(6, empresa.getHoraIniAr());
 			stm.setTime(7, empresa.getHoraFimAr());
-			stm.setInt(8, empresa.getTemperaturaPadrao());
+			stm.setInt(8, empresa.getConjunto().getId());
+			stm.setInt(9, empresa.getId());
 			stm.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +110,7 @@ public class EmpresaDao extends AbstractDao {
 				stm.setInt(1, empresa.getId());
 			
 			rs = stm.executeQuery();
+			Conjunto cj;
 			while (rs.next()) {
 
 				empresa.setId(rs.getInt("id"));
@@ -114,6 +121,10 @@ public class EmpresaDao extends AbstractDao {
 				empresa.setHorarioFechamento(rs.getTime("horaFechamento"));
 				empresa.setHoraIniAr(rs.getTime("horaIniAr"));
 				empresa.setHoraFimAr(rs.getTime("horaFimAr"));
+				cj = new Conjunto();
+				cj.setId(rs.getInt("conjunto_id"));
+				cj.consultar();
+				empresa.setConjunto(cj);
 				//empresa.setFuncionarios(usrDao.consultarTodos(empresa));
 			}
 		} catch (Exception e) {
@@ -155,6 +166,7 @@ public class EmpresaDao extends AbstractDao {
 			 * instanceof Empresa){ stm.setInt(1,((Empresa)entidade).getId()); }
 			 */
 			rs = stm.executeQuery();
+			Conjunto cj;
 			while (rs.next()) {
 				empresa = new Empresa();
 				empresa.setId(rs.getInt("id"));
@@ -165,6 +177,10 @@ public class EmpresaDao extends AbstractDao {
 				empresa.setHorarioFechamento(rs.getTime("horaFechamento"));
 				empresa.setHoraIniAr(rs.getTime("horaIniAr"));
 				empresa.setHoraFimAr(rs.getTime("horaFimAr"));
+				cj = new Conjunto();
+				cj.setId(rs.getInt("conjunto_id"));
+				cj.consultar();
+				empresa.setConjunto(cj);
 				//empresa.setFuncionarios(usrDao.consultarTodos(empresa));
 				empresas.add(empresa);
 

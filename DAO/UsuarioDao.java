@@ -37,7 +37,10 @@ public class UsuarioDao extends AbstractDao{
          stm.setInt(4, usr.getEmpresa().getId());
          stm.setTime(5, usr.getHoraAcesso());
          stm.setTime(6, usr.getHoraSaida());
-         stm.execute();
+         stm.executeUpdate();
+			ResultSet rs = stm.getGeneratedKeys();
+			rs.next();
+			usr.setId(rs.getInt(1));
       }
       catch (Exception e)
       {

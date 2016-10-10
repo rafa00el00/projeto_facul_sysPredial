@@ -62,4 +62,8 @@ public class Conjunto extends IEntidade{
    public void consultar(){dao.consultar(this); }
    public void deletar(){dao.deletar(this); }  	
 
+   @Override
+	public String toString() {
+		return getId() + " Sala " + getNrConjunto() + "; Andar: " + getAndar();
+	}
 }

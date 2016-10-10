@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -16,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import Controllers.EmpresaController;
+import Funcoes.MyList;
+import Models.Conjunto;
 import Models.Empresa;
 import languages.*;
 
@@ -23,26 +26,40 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
      
    private JLabel lblCNPJ, lblRazaoSocial, lblConjunto,
    lblhoraAberto,lblhoraFechado, lblIniAr,lblFimAr,lblTempAr;
-   private JTextField txtCNPJ, txtRazaoSocial,
-   txtConjunto;
+   private JTextField txtCNPJ, txtRazaoSocial;
+   private JComboBox<Conjunto> cmbConjunto;
    private JFormattedTextField txthoraAberto,txthoraFecha,txtIniAr,txthoraFimAr,txtTempAr;
    private JButton btnOk,btnCancel;
    
    private Empresa empresa;
+   private MyList<Conjunto> lstConjuntos;
+   
+   public void setLstConjunto(MyList<Conjunto> lstConjuntos) {
+		this.lstConjuntos = lstConjuntos;
+		cmbConjunto.removeAll();
+		for (Conjunto item : lstConjuntos) {
+			cmbConjunto.addItem(item);
+		}
+	}
+
+	public MyList<Conjunto> getLstConjunto() {
+		return this.lstConjuntos;
+	}
 
    public GuiCadEmpresa(JFrame fr,boolean op,Empresa emp){
       this(fr,op);
       empresa = emp;
       txtCNPJ.setText(emp.getCnpj());
       txtRazaoSocial.setText(emp.getRazaoSocial());
-      txtConjunto.setText(emp.getCnpj());
       txthoraAberto.setText(emp.getHorarioAbertura().toString().substring(0, 5));
       txthoraFecha.setText(emp.getHorarioFechamento().toString().substring(0, 5));
       txtIniAr.setText(emp.getHoraIniAr().toString().substring(0, 5));
       txthoraFimAr.setText(emp.getHoraFimAr().toString().substring(0, 5));
       txtTempAr.setText(emp.getTemperaturaPadrao()+"");
-
-      
+      if (emp.getConjunto().getId() != 0){
+      cmbConjunto.insertItemAt(emp.getConjunto(), 0);
+      cmbConjunto.setSelectedIndex(0);
+      }
    }
 
    public GuiCadEmpresa(JFrame fr,boolean op){
@@ -71,7 +88,7 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
 	}
       txtCNPJ = new JTextField();
       txtRazaoSocial = new JTextField();
-      txtConjunto = new JTextField();
+      cmbConjunto = new JComboBox();
       txthoraAberto = new JFormattedTextField(maskHora);
       txthoraFecha = new JFormattedTextField(maskHora);
       txtIniAr = new JFormattedTextField(maskHora);
@@ -101,7 +118,7 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
       add(lblRazaoSocial);
       add(txtRazaoSocial);
       add(lblConjunto);
-      add(txtConjunto);
+      add(cmbConjunto);
       add(lblTempAr);
       add(txtTempAr);
       add(lblhoraAberto);
@@ -122,7 +139,6 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
     	 //dispose();
     	  txtCNPJ.setText("123456789900");
           txtRazaoSocial.setText("teste");
-          txtConjunto.setText("1");
           txthoraAberto.setText("10:00");
           txthoraFecha.setText("14:00");
           txtIniAr.setText("10:30");
@@ -141,8 +157,8 @@ public class GuiCadEmpresa extends JDialog implements ActionListener{
     	  empresa.setHoraIniAr(Time.valueOf(txtIniAr.getText()+":00"));
     	  empresa.setRazaoSocial(txtRazaoSocial.getText());
     	  empresa.setTemperaturaPadrao(Integer.parseInt(txtTempAr.getText()));
-    	  
-    	  
+    	  empresa.setConjunto(((Conjunto)cmbConjunto.getSelectedItem()));
+
     	  if (empresa.getId() <=0){
     		  EmpresaController.incluir(empresa);
     	  }else{

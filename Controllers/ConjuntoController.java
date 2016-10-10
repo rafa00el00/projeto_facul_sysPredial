@@ -4,6 +4,9 @@ import Models.*;
 import Funcoes.*;
 import DAO.*;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
 import Views.*;
 
 public abstract class ConjuntoController{
@@ -16,18 +19,20 @@ public abstract class ConjuntoController{
    }
    
    public static void consultar(){
-
       GuiConjunto gui = new GuiConjunto(conjuntos);
       gui.setVisible(true);
    }
    
    public static void consultar(String pesquisa,GuiConsultar gui){
-      //gui.atualizarTabela(conjuntos.find(e->e.getRazaoSocial().contains(pesquisa)));
+      gui.atualizarTabela(conjuntos.find(e->e.getNrConjunto().toUpperCase().contains(pesquisa.toUpperCase())));
    }
-   
+   public static void incluir(JFrame fr){
+	   GuiCadConjunto cad = new GuiCadConjunto(fr,false);
+       cad.setVisible(true);
+   }
    public static boolean incluir(Conjunto conjunto){
       try{
-         conjunto.incluir();
+         conjunto.inserir();
          conjuntos.add(conjunto);
       }
       catch(Exception e){

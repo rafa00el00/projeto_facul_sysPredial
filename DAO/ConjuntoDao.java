@@ -35,7 +35,10 @@ public class ConjuntoDao extends AbstractDao{
          stm.setDouble(3, conjunto.getAlugel());
          stm.setInt(4, conjunto.getTamanho());
          stm.setBoolean(5, conjunto.isOcupado());
-         stm.execute();
+         stm.executeUpdate();
+			ResultSet rs = stm.getGeneratedKeys();
+			rs.next();
+			conjunto.setId(rs.getInt(1));
       }
       catch (Exception e)
       {
@@ -182,7 +185,7 @@ public class ConjuntoDao extends AbstractDao{
    //Consultar
    public MyList<Conjunto> consultarTodos(IEntidade entidade)
    {
-      String sqlSelect = "SELECT * FROM Usuario";
+      String sqlSelect = "SELECT * FROM Conjunto";
       MyList<Conjunto> conjuntos = new MyList<Conjunto>();
       Conjunto conjunto;
              

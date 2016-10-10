@@ -89,11 +89,11 @@ public class Empresa extends IEntidade {
 		this.horaFimAr = horaFimAr;
 	}
 
-	public Conjunto getCj() {
+	public Conjunto getConjunto() {
 		return cj;
 	}
 
-	public void setCj(Conjunto cj) {
+	public void setConjunto(Conjunto cj) {
 		this.cj = cj;
 	}
 	public MyList<Usuario> getFuncionarios() {

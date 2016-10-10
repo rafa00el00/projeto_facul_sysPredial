@@ -1,6 +1,9 @@
 package Views;
 import javax.swing.*;
 import javax.swing.table.*;
+
+import Controllers.ConjuntoController;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -14,7 +17,7 @@ import Funcoes.*;
 public class GuiConjunto extends GuiConsultar implements ActionListener{
    
 
-   Object[] colunas = {"Conjunto","Andar","preco alugel","tamanho","ocupado","OBJ"};
+   Object[] colunas = {"Conjunto","Andar","preco alugel","tamanho","OBJ"};
 
    
    public GuiConjunto(MyList<Conjunto> conjuntos){
@@ -28,14 +31,17 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
       btnNovo.addActionListener(this);
       btnAlterar.addActionListener(this);
       btnDeletar.addActionListener(this);
-   
+      btnPesquisar.addActionListener(this);
+      lblPesquisar.setText("Sala:");
       super.repaint();
    }
    
    public void actionPerformed(ActionEvent e){
       if (e.getSource() == btnNovo){
-         GuiCadConjunto cad = new GuiCadConjunto(this,false);
-         cad.setVisible(true);
+         ConjuntoController.incluir(this);
+      }
+      else if (e.getSource() == btnPesquisar){
+    	  ConjuntoController.consultar(txtPesquisar.getText(), this);
       }
       else if (e.getSource() == btnAlterar){
          if (tblConsulta.getSelectedRow() < 0){
@@ -72,7 +78,6 @@ public class GuiConjunto extends GuiConsultar implements ActionListener{
          v.add(cj.getAndar());
          v.add(cj.getAlugel());
          v.add(cj.getTamanho());
-         v.add(cj.isOcupado());
          v.add(cj);
          dados.add(v);
       }

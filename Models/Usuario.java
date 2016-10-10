@@ -103,9 +103,6 @@ public class Usuario extends IEntidade{
    
    public void deletar(){ 
 	   dao.deletar(this);
-	   Login lg = new Login();
-	   lg.removeLogin(this);
-	   lg.salvarAlteracoes();
    }
    
 }

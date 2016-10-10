@@ -60,6 +60,8 @@ public class GuiCadUsuarios extends JDialog implements ActionListener {
 			cmbPrivilegio.setSelectedIndex(1);
 		} else if (usr.getPerfil().equals("FN")) {
 			cmbPrivilegio.setSelectedIndex(2);
+		} else if (usr.getPerfil().equals("CM")) {
+			cmbPrivilegio.setSelectedIndex(2);
 		}
 		txtLogin.setEnabled(false);
 	}
@@ -105,9 +107,11 @@ public class GuiCadUsuarios extends JDialog implements ActionListener {
 		privilegio[0] = ("AD");
 		privilegio[1] = ("AT");
 		privilegio[2] = ("FN");
+		privilegio[2] = ("CM");
 		cmbPrivilegio.addItem(Idiomas.getString("GuiCadUsuario.cmbPrivilegio.Admin"));
 		cmbPrivilegio.addItem(Idiomas.getString("GuiCadUsuario.cmbPrivilegio.Atendente"));
 		cmbPrivilegio.addItem(Idiomas.getString("GuiCadUsuario.cmbPrivilegio.Funcionario"));
+		cmbPrivilegio.addItem(Idiomas.getString("GuiCadUsuario.cmbPrivilegio.comum"));
 
 		if (op) {
 			btnOk = new JButton(Idiomas.getString("GuiCadUsuario.btnOk2"));
