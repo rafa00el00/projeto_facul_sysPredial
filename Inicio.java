@@ -16,9 +16,9 @@ public class Inicio{
       //Inicia os Controllers
       UsuarioController.init();
       EmpresaController.init();
-      
-      GuiLogin lg = new GuiLogin(null);
-      lg.setVisible(true);  
+      ConjuntoController.init();
+      	
+      UsuarioController.logar();
              
    }
 

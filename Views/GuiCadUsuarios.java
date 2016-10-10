@@ -103,11 +103,11 @@ public class GuiCadUsuarios extends JDialog implements ActionListener {
 		txtPwd = new JPasswordField();
 
 		cmbPrivilegio = new JComboBox();
-		privilegio = new String[3];
+		privilegio = new String[4];
 		privilegio[0] = ("AD");
 		privilegio[1] = ("AT");
 		privilegio[2] = ("FN");
-		privilegio[2] = ("CM");
+		privilegio[3] = ("CM");
 		cmbPrivilegio.addItem(Idiomas.getString("GuiCadUsuario.cmbPrivilegio.Admin"));
 		cmbPrivilegio.addItem(Idiomas.getString("GuiCadUsuario.cmbPrivilegio.Atendente"));
 		cmbPrivilegio.addItem(Idiomas.getString("GuiCadUsuario.cmbPrivilegio.Funcionario"));
